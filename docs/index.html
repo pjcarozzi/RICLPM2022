@@ -3,7 +3,8 @@
   <head>
     <title>Random Intercept Cross Lagged Panel Models</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Roberto González (rgonzale@uc.cl), Pia Carozzi (pjcarozzi@uc.cl)" />
+    <meta name="author" content="Roberto González (rgonzale@uc.cl)" />
+    <meta name="author" content="Pía Carozzi (pjcarozzi@uc.cl)" />
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/panelset/panelset.css" rel="stylesheet" />
@@ -15,11 +16,21 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Random Intercept Cross Lagged Panel Models
+]
+.subtitle[
 ## Estimación en Lavaan
-### Roberto González (rgonzale@uc.cl)
-### Pia Carozzi (pjcarozzi@uc.cl)
-### 2022-07-22 (Actualización: 2022-07-08)
+]
+.author[
+### Roberto González (<a href="mailto:rgonzale@uc.cl" class="email">rgonzale@uc.cl</a>)
+]
+.author[
+### Pía Carozzi (<a href="mailto:pjcarozzi@uc.cl" class="email">pjcarozzi@uc.cl</a>)
+]
+.date[
+### 2022-07-22 (Actualización: 2022-07-22)
+]
 
 ---
 
@@ -103,7 +114,7 @@ Las medidas que utilizaremos son las siguientes:
 # Modelo
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_1_1.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -121,7 +132,7 @@ Las medidas que utilizaremos son las siguientes:
 # Modelo
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_1_2.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -141,7 +152,7 @@ Los interceptos aleatorios representan el componente **between**: son las desvia
 # Modelo
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_1_3.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -161,7 +172,7 @@ Constituyen las **fluctuaciones intra-persona**, el componente _within_.
 # Modelo
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_1_3.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -349,7 +360,7 @@ La especificación del RI-CLPM cuenta con 4 partes:
 
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_2_1.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -402,7 +413,7 @@ between &lt;- '
 
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_2_2.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -425,17 +436,6 @@ Variables latentes, explicadas por sus respectivas medidas observadas en cada oc
 .small2[
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
-
-```r
-between &lt;- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
-           '
-```
-] 
-
 .panel[.panel-name[Componente within, fluctuaciones intra-individuos.]
 
 ```r
@@ -465,6 +465,17 @@ within  &lt;- '
              onl5 ~~ 0*onl5
           '
 ```
+]
+
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
+
+```r
+between &lt;- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+           '
+```
 ] ] ]
 
 
@@ -478,7 +489,7 @@ Se constriñen las varianzas del error de medición a cero, no hay error de medi
 
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_2_3.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -498,13 +509,19 @@ Efectos lagged autorregresivos y crosslagged.
 .small2[
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
+.panel[.panel-name[Las regresiones entre los componentes _within_.]
 
 ```r
-between &lt;- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+efectos  &lt;- '
+              # Estimar los efectos lagged
+               cx2 ~ cx1 + cy1
+               cx3 ~ cx2 + cy2
+               cx4 ~ cx3 + cy3
+               cx5 ~ cx4 + cy4
+               cy2 ~ cx1 + cy1
+               cy3 ~ cx2 + cy2
+               cy4 ~ cx3 + cy3
+               cy5 ~ cx4 + cy4
            '
 ```
 ] 
@@ -538,21 +555,15 @@ within  &lt;- '
              onl5 ~~ 0*onl5
           '
 ```
-] 
+]
 
-.panel[.panel-name[Las regresiones entre los componentes _within_.]
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
 
 ```r
-efectos  &lt;- '
-              # Estimar los efectos lagged
-               cx2 ~ cx1 + cy1
-               cx3 ~ cx2 + cy2
-               cx4 ~ cx3 + cy3
-               cx5 ~ cx4 + cy4
-               cy2 ~ cx1 + cy1
-               cy3 ~ cx2 + cy2
-               cy4 ~ cx3 + cy3
-               cy5 ~ cx4 + cy4
+between &lt;- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
            '
 ```
 ] ] ]
@@ -565,7 +576,7 @@ efectos  &lt;- '
 
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_2_4.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -586,13 +597,36 @@ Los componentes within estén correlacionados en cada `\(t\)`, tanto en la prime
 
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
+.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
 
 ```r
-between &lt;- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+covarianza1  &lt;- '
+                 # Estimar la covarianza entre los componentes within t=1
+                 cx1 ~~ cy1
+                 
+                 # Estimar las covarianzas entre los residuos del componente within
+                 cx2 ~~ cy2
+                 cx3 ~~ cy3
+                 cx4 ~~ cy4
+                 cx5 ~~ cy5
+              '
+```
+] 
+
+
+.panel[.panel-name[Las regresiones entre los componentes _within_.]
+
+```r
+efectos  &lt;- '
+              # Estimar los efectos lagged
+               cx2 ~ cx1 + cy1
+               cx3 ~ cx2 + cy2
+               cx4 ~ cx3 + cy3
+               cx5 ~ cx4 + cy4
+               cy2 ~ cx1 + cy1
+               cy3 ~ cx2 + cy2
+               cy4 ~ cx3 + cy3
+               cy5 ~ cx4 + cy4
            '
 ```
 ] 
@@ -626,38 +660,16 @@ within  &lt;- '
              onl5 ~~ 0*onl5
           '
 ```
-] 
-
-.panel[.panel-name[Las regresiones entre los componentes _within_.]
-
-```r
-efectos  &lt;- '
-              # Estimar los efectos lagged
-               cx2 ~ cx1 + cy1
-               cx3 ~ cx2 + cy2
-               cx4 ~ cx3 + cy3
-               cx5 ~ cx4 + cy4
-               cy2 ~ cx1 + cy1
-               cy3 ~ cx2 + cy2
-               cy4 ~ cx3 + cy3
-               cy5 ~ cx4 + cy4
-           '
-```
 ]
 
-.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
 
 ```r
-covarianza1  &lt;- '
-                 # Estimar la covarianza entre los componentes within t=1
-                 cx1 ~~ cy1
-                 
-                 # Estimar las covarianzas entre los residuos del componente within
-                 cx2 ~~ cy2
-                 cx3 ~~ cy3
-                 cx4 ~~ cy4
-                 cx5 ~~ cy5
-              '
+between &lt;- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+           '
 ```
 ] ] ]
 
@@ -670,7 +682,7 @@ covarianza1  &lt;- '
 
 .pull-leftadd[
 &lt;div class="figure" style="text-align: left"&gt;
-&lt;img src="assets/3_RICLPM.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
+&lt;img src="assets/0_2_5.png" alt="RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line" width="90%" /&gt;
 &lt;p class="caption"&gt;RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line&lt;/p&gt;
 &lt;/div&gt;
 ]
@@ -698,13 +710,55 @@ Las observaciones por lo general empiezan en un punto arbitrario del tiempo dura
 
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
+.panel[.panel-name[Covarianzas relevantes en los componentes between y within (II)]
 
 ```r
-between &lt;- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+covarianza2  &lt;- '
+                 # Estimar la varianza y covarianza entre los RI. 
+                 RI_x ~~ RI_x
+                 RI_y ~~ RI_y
+                 RI_x ~~ RI_y
+                  
+                 # Fijar la correlacion entre los RI y componentes within t=1 a cero 
+                 RI_x ~~ 0*cx1
+                 RI_x ~~ 0*cy1
+                 RI_y ~~ 0*cx1
+                 RI_y ~~ 0*cy1
+              '
+```
+] 
+
+
+.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
+
+```r
+covarianza1  &lt;- '
+                 # Estimar la covarianza entre los componentes within t=1
+                 cx1 ~~ cy1
+                 
+                 # Estimar las covarianzas entre los residuos del componente within
+                 cx2 ~~ cy2
+                 cx3 ~~ cy3
+                 cx4 ~~ cy4
+                 cx5 ~~ cy5
+              '
+```
+] 
+
+
+.panel[.panel-name[Las regresiones entre los componentes _within_.]
+
+```r
+efectos  &lt;- '
+              # Estimar los efectos lagged
+               cx2 ~ cx1 + cy1
+               cx3 ~ cx2 + cy2
+               cx4 ~ cx3 + cy3
+               cx5 ~ cx4 + cy4
+               cy2 ~ cx1 + cy1
+               cy3 ~ cx2 + cy2
+               cy4 ~ cx3 + cy3
+               cy5 ~ cx4 + cy4
            '
 ```
 ] 
@@ -738,68 +792,16 @@ within  &lt;- '
              onl5 ~~ 0*onl5
           '
 ```
-] 
+]
 
-.panel[.panel-name[Las regresiones entre los componentes _within_.]
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
 
 ```r
-efectos  &lt;- '
-              # Estimar los efectos lagged
-               cx2 ~ cx1 + cy1
-               cx3 ~ cx2 + cy2
-               cx4 ~ cx3 + cy3
-               cx5 ~ cx4 + cy4
-               cy2 ~ cx1 + cy1
-               cy3 ~ cx2 + cy2
-               cy4 ~ cx3 + cy3
-               cy5 ~ cx4 + cy4
+between &lt;- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
            '
-```
-]
-
-.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
-
-```r
-covarianza1  &lt;- '
-                 # Estimar la covarianza entre los componentes within t=1
-                 cx1 ~~ cy1
-                 
-                 # Estimar las covarianzas entre los residuos del componente within
-                 cx2 ~~ cy2
-                 cx3 ~~ cy3
-                 cx4 ~~ cy4
-                 cx5 ~~ cy5
-                 
-                 # Estimar las varianzas residuales del componente within
-                 cx1 ~~ cx1 # Varianzas
-                 cy1 ~~ cy1 
-                 cx2 ~~ cx2 # Varianzas residuales
-                 cy2 ~~ cy2 
-                 cx3 ~~ cx3 
-                 cy3 ~~ cy3 
-                 cx4 ~~ cx4 
-                 cy4 ~~ cy4 
-                 cx5 ~~ cx5
-                 cy5 ~~ cy5  
-               '
-```
-]
-
-.panel[.panel-name[Covarianzas relevantes en los componentes between y within (II)]
-
-```r
-covarianza2  &lt;- '
-                 # Estimar la varianza y covarianza entre los RI. 
-                 RI_x ~~ RI_x
-                 RI_y ~~ RI_y
-                 RI_x ~~ RI_y
-                  
-                 # Fijar la correlacion entre los RI y componentes within t=1 a cero 
-                 RI_x ~~ 0*cx1
-                 RI_x ~~ 0*cy1
-                 RI_y ~~ 0*cx1
-                 RI_y ~~ 0*cy1
-              '
 ```
 ] ] ]
 
@@ -897,11 +899,13 @@ Estimamos el objeto `modelo_lavaan` usando la función `lavaan( )`
 
 
 ```r
-fit_lavaan &lt;- lavaan(modelo_lavaan, data = elsoc, estimator = "MLR", missing = "FIML",
+fit_lavaan &lt;- lavaan(modelo_lavaan, data=elsoc, estimator = "MLR", missing = "FIML",
                      meanstructure = T, int.ov.free = T)
 ```
 
 También es posible realizar la estimación a partir de varios objetos:
+
+
 
 
 ```r
@@ -910,7 +914,7 @@ fit_lavaan2 &lt;- lavaan(model = c(between, within, efectos, covarianza1, covari
                       meanstructure = T, int.ov.free = T)
 ```
 
-El estimador default de `lavaan` es maximum maximum likelihood (`estimator = "ML"`), pero podemos especificar otros estimadores alternativos disponibles en `lavaan` (GLS, WLS, DWLS, ULS, DLS, PML, etc.). En este caso, usamos una estimación de maximum likelihood con errores estándar robustos (Huber-White) y estadísticos de prueba escalados (equivalentes a los estadísticos de prueba de Yuan-Bentler).
+El estimador default de `lavaan` es maximum likelihood (`estimator = "ML"`), pero podemos especificar otros estimadores alternativos disponibles en `lavaan` (GLS, WLS, DWLS, ULS, DLS, PML, etc.). En este caso, usamos una estimación de maximum likelihood con errores estándar robustos (Huber-White) y estadísticos de prueba escalados (equivalentes a los estadísticos de prueba de Yuan-Bentler).
 
 El comportamiento default de de `lavaan` frente a los valores perdidos es listwise deletion. Si los datos son MCAR (missing completely at random) o MAR (missing at random), podemos estimar caso a caso usando full information maximum likelihood para lidiar con los casos perdidos.
 
@@ -925,7 +929,7 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ```
 
 ```
-## lavaan 0.6-10 ended normally after 54 iterations
+## lavaan 0.6-11 ended normally after 54 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
@@ -993,39 +997,72 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ##   Observed information based on                Hessian
 ## 
 ## Latent Variables:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
-##   RI_x =~                                                               
-##     off1              1.000                               1.000    1.000
-##     off2              1.000                               1.000    1.000
-##     off3              1.000                               1.000    1.000
-##     off4              1.000                               1.000    1.000
-##     off5              1.000                               1.000    1.000
-##   RI_y =~                                                               
-##     onl1              1.000                               1.000    1.000
-##     onl2              1.000                               1.000    1.000
-##     onl3              1.000                               1.000    1.000
-##     onl4              1.000                               1.000    1.000
-##     onl5              1.000                               1.000    1.000
-##   cx1 =~                                                                
-##     off1              1.000                               1.000    1.000
-##   cx2 =~                                                                
-##     off2              1.000                               1.000    1.000
-##   cx3 =~                                                                
-##     off3              1.000                               1.000    1.000
-##   cx4 =~                                                                
-##     off4              1.000                               1.000    1.000
-##   cx5 =~                                                                
-##     off5              1.000                               1.000    1.000
-##   cy1 =~                                                                
-##     onl1              1.000                               1.000    1.000
-##   cy2 =~                                                                
-##     onl2              1.000                               1.000    1.000
-##   cy3 =~                                                                
-##     onl3              1.000                               1.000    1.000
-##   cy4 =~                                                                
-##     onl4              1.000                               1.000    1.000
-##   cy5 =~                                                                
-##     onl5              1.000                               1.000    1.000
+##                    Estimate  Std.Err
+##   RI_x =~                           
+##     off1              1.000         
+##     off2              1.000         
+##     off3              1.000         
+##     off4              1.000         
+##     off5              1.000         
+##   RI_y =~                           
+##     onl1              1.000         
+##     onl2              1.000         
+##     onl3              1.000         
+##     onl4              1.000         
+##     onl5              1.000         
+##   cx1 =~                            
+##     off1              1.000         
+##   cx2 =~                            
+##     off2              1.000         
+##   cx3 =~                            
+##     off3              1.000         
+##   cx4 =~                            
+##     off4              1.000         
+##   cx5 =~                            
+##     off5              1.000         
+##   cy1 =~                            
+##     onl1              1.000         
+##   cy2 =~                            
+##     onl2              1.000         
+##   cy3 =~                            
+##     onl3              1.000         
+##   cy4 =~                            
+##     onl4              1.000         
+##   cy5 =~                            
+##     onl5              1.000         
+##   z-value  P(&gt;|z|) ci.lower ci.upper
+##                                     
+##                       1.000    1.000
+##                       1.000    1.000
+##                       1.000    1.000
+##                       1.000    1.000
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                       1.000    1.000
+##                       1.000    1.000
+##                       1.000    1.000
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
+##                                     
+##                       1.000    1.000
 ##    Std.lv  Std.all
 ##                   
 ##     0.387    0.508
@@ -1061,31 +1098,56 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ##     0.938    0.782
 ## 
 ## Regressions:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
-##   cx2 ~                                                                 
-##     cx1               0.135    0.044    3.089    0.002    0.049    0.221
-##     cy1              -0.022    0.021   -1.025    0.305   -0.063    0.020
-##   cx3 ~                                                                 
-##     cx2               0.186    0.062    2.978    0.003    0.064    0.308
-##     cy2              -0.013    0.026   -0.485    0.627   -0.064    0.039
-##   cx4 ~                                                                 
-##     cx3               0.276    0.064    4.343    0.000    0.151    0.401
-##     cy3               0.167    0.034    4.896    0.000    0.100    0.233
-##   cx5 ~                                                                 
-##     cx4               0.169    0.024    6.935    0.000    0.121    0.216
-##     cy4               0.027    0.017    1.572    0.116   -0.007    0.060
-##   cy2 ~                                                                 
-##     cx1               0.014    0.049    0.287    0.774   -0.081    0.109
-##     cy1              -0.004    0.036   -0.114    0.909   -0.075    0.067
-##   cy3 ~                                                                 
-##     cx2               0.143    0.067    2.118    0.034    0.011    0.275
-##     cy2               0.083    0.044    1.897    0.058   -0.003    0.168
-##   cy4 ~                                                                 
-##     cx3               0.088    0.059    1.485    0.138   -0.028    0.204
-##     cy3               0.249    0.040    6.162    0.000    0.170    0.328
-##   cy5 ~                                                                 
-##     cx4               0.125    0.029    4.393    0.000    0.070    0.181
-##     cy4               0.254    0.028    9.151    0.000    0.200    0.309
+##                    Estimate  Std.Err
+##   cx2 ~                             
+##     cx1               0.135    0.044
+##     cy1              -0.022    0.021
+##   cx3 ~                             
+##     cx2               0.186    0.062
+##     cy2              -0.013    0.026
+##   cx4 ~                             
+##     cx3               0.276    0.064
+##     cy3               0.167    0.034
+##   cx5 ~                             
+##     cx4               0.169    0.024
+##     cy4               0.027    0.017
+##   cy2 ~                             
+##     cx1               0.014    0.049
+##     cy1              -0.004    0.036
+##   cy3 ~                             
+##     cx2               0.143    0.067
+##     cy2               0.083    0.044
+##   cy4 ~                             
+##     cx3               0.088    0.059
+##     cy3               0.249    0.040
+##   cy5 ~                             
+##     cx4               0.125    0.029
+##     cy4               0.254    0.028
+##   z-value  P(&gt;|z|) ci.lower ci.upper
+##                                     
+##     3.089    0.002    0.049    0.221
+##    -1.025    0.305   -0.063    0.020
+##                                     
+##     2.978    0.003    0.064    0.308
+##    -0.485    0.627   -0.064    0.039
+##                                     
+##     4.343    0.000    0.151    0.401
+##     4.896    0.000    0.100    0.233
+##                                     
+##     6.935    0.000    0.121    0.216
+##     1.572    0.116   -0.007    0.060
+##                                     
+##     0.287    0.774   -0.081    0.109
+##    -0.114    0.909   -0.075    0.067
+##                                     
+##     2.118    0.034    0.011    0.275
+##     1.897    0.058   -0.003    0.168
+##                                     
+##     1.485    0.138   -0.028    0.204
+##     6.162    0.000    0.170    0.328
+##                                     
+##     4.393    0.000    0.070    0.181
+##     9.151    0.000    0.200    0.309
 ##    Std.lv  Std.all
 ##                   
 ##     0.168    0.168
@@ -1113,24 +1175,42 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ##     0.279    0.279
 ## 
 ## Covariances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
-##   cx1 ~~                                                                
-##     cy1               0.161    0.024    6.680    0.000    0.114    0.208
-##  .cx2 ~~                                                                
-##    .cy2               0.115    0.021    5.505    0.000    0.074    0.156
-##  .cx3 ~~                                                                
-##    .cy3               0.082    0.016    5.214    0.000    0.051    0.112
-##  .cx4 ~~                                                                
-##    .cy4               0.291    0.024   11.942    0.000    0.243    0.339
-##  .cx5 ~~                                                                
-##    .cy5               0.035    0.015    2.421    0.015    0.007    0.064
-##   RI_x ~~                                                               
-##     RI_y              0.188    0.017   10.936    0.000    0.155    0.222
-##     cx1               0.000                               0.000    0.000
-##     cy1               0.000                               0.000    0.000
-##   RI_y ~~                                                               
-##     cx1               0.000                               0.000    0.000
-##     cy1               0.000                               0.000    0.000
+##                    Estimate  Std.Err
+##   cx1 ~~                            
+##     cy1               0.161    0.024
+##  .cx2 ~~                            
+##    .cy2               0.115    0.021
+##  .cx3 ~~                            
+##    .cy3               0.082    0.016
+##  .cx4 ~~                            
+##    .cy4               0.291    0.024
+##  .cx5 ~~                            
+##    .cy5               0.035    0.015
+##   RI_x ~~                           
+##     RI_y              0.188    0.017
+##     cx1               0.000         
+##     cy1               0.000         
+##   RI_y ~~                           
+##     cx1               0.000         
+##     cy1               0.000         
+##   z-value  P(&gt;|z|) ci.lower ci.upper
+##                                     
+##     6.680    0.000    0.114    0.208
+##                                     
+##     5.505    0.000    0.074    0.156
+##                                     
+##     5.214    0.000    0.051    0.112
+##                                     
+##    11.942    0.000    0.243    0.339
+##                                     
+##     2.421    0.015    0.007    0.064
+##                                     
+##    10.936    0.000    0.155    0.222
+##                       0.000    0.000
+##                       0.000    0.000
+##                                     
+##                       0.000    0.000
+##                       0.000    0.000
 ##    Std.lv  Std.all
 ##                   
 ##     0.271    0.271
@@ -1151,29 +1231,52 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ##     0.000    0.000
 ## 
 ## Intercepts:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
-##    .off1              1.325    0.014   93.675    0.000    1.297    1.353
-##    .off2              1.233    0.013   95.647    0.000    1.208    1.258
-##    .off3              1.217    0.010  117.866    0.000    1.196    1.237
-##    .off4              1.542    0.017   89.988    0.000    1.508    1.575
-##    .off5              1.209    0.012  101.809    0.000    1.186    1.232
-##    .onl1              1.733    0.021   82.252    0.000    1.692    1.775
-##    .onl2              1.631    0.021   78.571    0.000    1.591    1.672
-##    .onl3              1.646    0.017   94.816    0.000    1.612    1.680
-##    .onl4              1.905    0.021   88.631    0.000    1.863    1.947
-##    .onl5              1.845    0.022   85.604    0.000    1.803    1.888
-##     RI_x              0.000                               0.000    0.000
-##     RI_y              0.000                               0.000    0.000
-##     cx1               0.000                               0.000    0.000
-##    .cx2               0.000                               0.000    0.000
-##    .cx3               0.000                               0.000    0.000
-##    .cx4               0.000                               0.000    0.000
-##    .cx5               0.000                               0.000    0.000
-##     cy1               0.000                               0.000    0.000
-##    .cy2               0.000                               0.000    0.000
-##    .cy3               0.000                               0.000    0.000
-##    .cy4               0.000                               0.000    0.000
-##    .cy5               0.000                               0.000    0.000
+##                    Estimate  Std.Err
+##    .off1              1.325    0.014
+##    .off2              1.233    0.013
+##    .off3              1.217    0.010
+##    .off4              1.542    0.017
+##    .off5              1.209    0.012
+##    .onl1              1.733    0.021
+##    .onl2              1.631    0.021
+##    .onl3              1.646    0.017
+##    .onl4              1.905    0.021
+##    .onl5              1.845    0.022
+##     RI_x              0.000         
+##     RI_y              0.000         
+##     cx1               0.000         
+##    .cx2               0.000         
+##    .cx3               0.000         
+##    .cx4               0.000         
+##    .cx5               0.000         
+##     cy1               0.000         
+##    .cy2               0.000         
+##    .cy3               0.000         
+##    .cy4               0.000         
+##    .cy5               0.000         
+##   z-value  P(&gt;|z|) ci.lower ci.upper
+##    93.675    0.000    1.297    1.353
+##    95.647    0.000    1.208    1.258
+##   117.866    0.000    1.196    1.237
+##    89.988    0.000    1.508    1.575
+##   101.809    0.000    1.186    1.232
+##    82.252    0.000    1.692    1.775
+##    78.571    0.000    1.591    1.672
+##    94.816    0.000    1.612    1.680
+##    88.631    0.000    1.863    1.947
+##    85.604    0.000    1.803    1.888
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
 ##    Std.lv  Std.all
 ##     1.325    1.740
 ##     1.233    1.882
@@ -1199,29 +1302,52 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ##     0.000    0.000
 ## 
 ## Variances:
-##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper
-##    .off1              0.000                               0.000    0.000
-##    .off2              0.000                               0.000    0.000
-##    .off3              0.000                               0.000    0.000
-##    .off4              0.000                               0.000    0.000
-##    .off5              0.000                               0.000    0.000
-##    .onl1              0.000                               0.000    0.000
-##    .onl2              0.000                               0.000    0.000
-##    .onl3              0.000                               0.000    0.000
-##    .onl4              0.000                               0.000    0.000
-##    .onl5              0.000                               0.000    0.000
-##     cx1               0.430    0.031   13.927    0.000    0.370    0.491
-##     cy1               0.818    0.037   22.306    0.000    0.747    0.890
-##    .cx2               0.272    0.023   11.585    0.000    0.226    0.318
-##    .cy2               0.650    0.039   16.820    0.000    0.574    0.726
-##    .cx3               0.255    0.019   13.304    0.000    0.217    0.292
-##    .cy3               0.610    0.028   21.952    0.000    0.556    0.664
-##    .cx4               0.781    0.030   25.756    0.000    0.721    0.840
-##    .cy4               1.012    0.033   30.901    0.000    0.947    1.076
-##    .cx5               0.306    0.023   13.306    0.000    0.261    0.351
-##    .cy5               0.778    0.031   25.177    0.000    0.717    0.838
-##     RI_x              0.149    0.018    8.365    0.000    0.114    0.185
-##     RI_y              0.560    0.026   21.147    0.000    0.508    0.612
+##                    Estimate  Std.Err
+##    .off1              0.000         
+##    .off2              0.000         
+##    .off3              0.000         
+##    .off4              0.000         
+##    .off5              0.000         
+##    .onl1              0.000         
+##    .onl2              0.000         
+##    .onl3              0.000         
+##    .onl4              0.000         
+##    .onl5              0.000         
+##     cx1               0.430    0.031
+##     cy1               0.818    0.037
+##    .cx2               0.272    0.023
+##    .cy2               0.650    0.039
+##    .cx3               0.255    0.019
+##    .cy3               0.610    0.028
+##    .cx4               0.781    0.030
+##    .cy4               1.012    0.033
+##    .cx5               0.306    0.023
+##    .cy5               0.778    0.031
+##     RI_x              0.149    0.018
+##     RI_y              0.560    0.026
+##   z-value  P(&gt;|z|) ci.lower ci.upper
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##                       0.000    0.000
+##    13.927    0.000    0.370    0.491
+##    22.306    0.000    0.747    0.890
+##    11.585    0.000    0.226    0.318
+##    16.820    0.000    0.574    0.726
+##    13.304    0.000    0.217    0.292
+##    21.952    0.000    0.556    0.664
+##    25.756    0.000    0.721    0.840
+##    30.901    0.000    0.947    1.076
+##    13.306    0.000    0.261    0.351
+##    25.177    0.000    0.717    0.838
+##     8.365    0.000    0.114    0.185
+##    21.147    0.000    0.508    0.612
 ##    Std.lv  Std.all
 ##     0.000    0.000
 ##     0.000    0.000
@@ -1392,7 +1518,7 @@ varcov &lt;- '
 .panel[.panel-name[Efectos A]
 
 ```r
-a1 &lt;- ' 
+a1 &lt;- ' # Sin constreñir
            cx2 ~ cx1
            cx3 ~ cx2
            cx4 ~ cx3
@@ -1406,7 +1532,7 @@ a1 &lt;- '
 
 
 ```r
-a2 &lt;- ' 
+a2 &lt;- ' # Constreñido
            cx2 ~ a*cx1
            cx3 ~ a*cx2
            cx4 ~ a*cx3
@@ -1422,7 +1548,7 @@ a2 &lt;- '
 .panel[.panel-name[Efectos B]
 
 ```r
-b1 &lt;- ' 
+b1 &lt;- ' # Sin constreñir
            cx2 ~ cx1
            cx3 ~ cx2 
            cx4 ~ cx3
@@ -1436,7 +1562,7 @@ b1 &lt;- '
 
 
 ```r
-b2 &lt;- ' 
+b2 &lt;- ' # Constreñido
            cx2 ~ a*cx1
            cx3 ~ a*cx2
            cx4 ~ a*cx3
@@ -1452,7 +1578,7 @@ b2 &lt;- '
 .panel[.panel-name[Efectos C]
 
 ```r
-c1 &lt;- ' 
+c1 &lt;- ' # Sin constreñir
            cx2 ~ cx1 + cy1
            cx3 ~ cx2 + cy2 
            cx4 ~ cx3 + cy3
@@ -1466,7 +1592,7 @@ c1 &lt;- '
 
 
 ```r
-c2 &lt;- ' 
+c2 &lt;- ' # Constreñido
            cx2 ~ a*cx1 + b*cy1
            cx3 ~ a*cx2 + b*cy2 
            cx4 ~ a*cx3 + b*cy3
@@ -1482,7 +1608,7 @@ c2 &lt;- '
 .panel[.panel-name[Efectos D]
 
 ```r
-d1 &lt;- ' 
+d1 &lt;- ' # Sin constreñir
            cx2 ~ cx1 + cy1
            cx3 ~ cx2 + cy2 
            cx4 ~ cx3 + cy3
@@ -1496,7 +1622,7 @@ d1 &lt;- '
 
 
 ```r
-d2 &lt;- ' 
+d2 &lt;- ' # Constreñido
            cx2 ~ a*cx1 + b*cy1
            cx3 ~ a*cx2 + b*cy2 
            cx4 ~ a*cx3 + b*cy3
@@ -1981,97 +2107,188 @@ parameterEstimates(fit[["d2"]])
 ```
 
 ```
-##     lhs op  rhs label   est    se       z pvalue ci.lower ci.upper
-## 1  RI_x =~ off1       1.000 0.000      NA     NA    1.000    1.000
-## 2  RI_x =~ off2       1.000 0.000      NA     NA    1.000    1.000
-## 3  RI_x =~ off3       1.000 0.000      NA     NA    1.000    1.000
-## 4  RI_x =~ off4       1.000 0.000      NA     NA    1.000    1.000
-## 5  RI_x =~ off5       1.000 0.000      NA     NA    1.000    1.000
-## 6  RI_y =~ onl1       1.000 0.000      NA     NA    1.000    1.000
-## 7  RI_y =~ onl2       1.000 0.000      NA     NA    1.000    1.000
-## 8  RI_y =~ onl3       1.000 0.000      NA     NA    1.000    1.000
-## 9  RI_y =~ onl4       1.000 0.000      NA     NA    1.000    1.000
-## 10 RI_y =~ onl5       1.000 0.000      NA     NA    1.000    1.000
-## 11  cx1 =~ off1       1.000 0.000      NA     NA    1.000    1.000
-## 12  cx2 =~ off2       1.000 0.000      NA     NA    1.000    1.000
-## 13  cx3 =~ off3       1.000 0.000      NA     NA    1.000    1.000
-## 14  cx4 =~ off4       1.000 0.000      NA     NA    1.000    1.000
-## 15  cx5 =~ off5       1.000 0.000      NA     NA    1.000    1.000
-## 16  cy1 =~ onl1       1.000 0.000      NA     NA    1.000    1.000
-## 17  cy2 =~ onl2       1.000 0.000      NA     NA    1.000    1.000
-## 18  cy3 =~ onl3       1.000 0.000      NA     NA    1.000    1.000
-## 19  cy4 =~ onl4       1.000 0.000      NA     NA    1.000    1.000
-## 20  cy5 =~ onl5       1.000 0.000      NA     NA    1.000    1.000
-## 21 off1 ~~ off1       0.000 0.000      NA     NA    0.000    0.000
-## 22 off2 ~~ off2       0.000 0.000      NA     NA    0.000    0.000
-## 23 off3 ~~ off3       0.000 0.000      NA     NA    0.000    0.000
-## 24 off4 ~~ off4       0.000 0.000      NA     NA    0.000    0.000
-## 25 off5 ~~ off5       0.000 0.000      NA     NA    0.000    0.000
-## 26 onl1 ~~ onl1       0.000 0.000      NA     NA    0.000    0.000
-## 27 onl2 ~~ onl2       0.000 0.000      NA     NA    0.000    0.000
-## 28 onl3 ~~ onl3       0.000 0.000      NA     NA    0.000    0.000
-## 29 onl4 ~~ onl4       0.000 0.000      NA     NA    0.000    0.000
-## 30 onl5 ~~ onl5       0.000 0.000      NA     NA    0.000    0.000
-## 31  cx2  ~  cx1     a 0.152 0.022   6.997  0.000    0.109    0.194
-## 32  cx2  ~  cy1     b 0.022 0.011   2.036  0.042    0.001    0.044
-## 33  cx3  ~  cx2     a 0.152 0.022   6.997  0.000    0.109    0.194
-## 34  cx3  ~  cy2     b 0.022 0.011   2.036  0.042    0.001    0.044
-## 35  cx4  ~  cx3     a 0.152 0.022   6.997  0.000    0.109    0.194
-## 36  cx4  ~  cy3     b 0.022 0.011   2.036  0.042    0.001    0.044
-## 37  cx5  ~  cx4     a 0.152 0.022   6.997  0.000    0.109    0.194
-## 38  cx5  ~  cy4     b 0.022 0.011   2.036  0.042    0.001    0.044
-## 39  cy2  ~  cx1     c 0.079 0.023   3.418  0.001    0.034    0.124
-## 40  cy2  ~  cy1     d 0.142 0.022   6.555  0.000    0.100    0.185
-## 41  cy3  ~  cx2     c 0.079 0.023   3.418  0.001    0.034    0.124
-## 42  cy3  ~  cy2     d 0.142 0.022   6.555  0.000    0.100    0.185
-## 43  cy4  ~  cx3     c 0.079 0.023   3.418  0.001    0.034    0.124
-## 44  cy4  ~  cy3     d 0.142 0.022   6.555  0.000    0.100    0.185
-## 45  cy5  ~  cx4     c 0.079 0.023   3.418  0.001    0.034    0.124
-## 46  cy5  ~  cy4     d 0.142 0.022   6.555  0.000    0.100    0.185
-## 47  cx1 ~~  cy1       0.176 0.022   7.910  0.000    0.132    0.219
-## 48  cx2 ~~  cy2       0.139 0.019   7.454  0.000    0.102    0.175
-## 49  cx3 ~~  cy3       0.071 0.014   4.962  0.000    0.043    0.098
-## 50  cx4 ~~  cy4       0.258 0.024  10.670  0.000    0.210    0.305
-## 51  cx5 ~~  cy5       0.025 0.014   1.756  0.079   -0.003    0.053
-## 52  cx1 ~~  cx1       0.431 0.028  15.331  0.000    0.376    0.486
-## 53  cy1 ~~  cy1       0.869 0.037  23.649  0.000    0.797    0.942
-## 54  cx2 ~~  cx2       0.275 0.021  12.888  0.000    0.233    0.317
-## 55  cy2 ~~  cy2       0.735 0.036  20.144  0.000    0.664    0.807
-## 56  cx3 ~~  cx3       0.246 0.018  13.673  0.000    0.211    0.281
-## 57  cy3 ~~  cy3       0.588 0.026  22.857  0.000    0.537    0.638
-## 58  cx4 ~~  cx4       0.769 0.031  25.143  0.000    0.709    0.829
-## 59  cy4 ~~  cy4       0.949 0.034  27.589  0.000    0.881    1.016
-## 60  cx5 ~~  cx5       0.305 0.022  14.017  0.000    0.263    0.348
-## 61  cy5 ~~  cy5       0.747 0.031  23.978  0.000    0.686    0.808
-## 62 RI_x ~~ RI_x       0.161 0.016  10.220  0.000    0.130    0.192
-## 63 RI_y ~~ RI_y       0.581 0.025  22.835  0.000    0.531    0.631
-## 64 RI_x ~~ RI_y       0.202 0.015  13.343  0.000    0.172    0.232
-## 65 RI_x ~~  cx1       0.000 0.000      NA     NA    0.000    0.000
-## 66 RI_x ~~  cy1       0.000 0.000      NA     NA    0.000    0.000
-## 67 RI_y ~~  cx1       0.000 0.000      NA     NA    0.000    0.000
-## 68 RI_y ~~  cy1       0.000 0.000      NA     NA    0.000    0.000
-## 69 off1 ~1            1.327 0.014  93.848  0.000    1.299    1.354
-## 70 off2 ~1            1.234 0.013  97.101  0.000    1.209    1.259
-## 71 off3 ~1            1.217 0.010 117.731  0.000    1.196    1.237
-## 72 off4 ~1            1.541 0.017  90.026  0.000    1.507    1.574
-## 73 off5 ~1            1.209 0.012  99.232  0.000    1.185    1.232
-## 74 onl1 ~1            1.736 0.021  82.430  0.000    1.695    1.778
-## 75 onl2 ~1            1.636 0.021  79.135  0.000    1.596    1.677
-## 76 onl3 ~1            1.646 0.017  94.755  0.000    1.612    1.680
-## 77 onl4 ~1            1.904 0.021  88.599  0.000    1.862    1.946
-## 78 onl5 ~1            1.847 0.022  85.202  0.000    1.805    1.890
-## 79 RI_x ~1            0.000 0.000      NA     NA    0.000    0.000
-## 80 RI_y ~1            0.000 0.000      NA     NA    0.000    0.000
-## 81  cx1 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 82  cx2 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 83  cx3 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 84  cx4 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 85  cx5 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 86  cy1 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 87  cy2 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 88  cy3 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 89  cy4 ~1            0.000 0.000      NA     NA    0.000    0.000
-## 90  cy5 ~1            0.000 0.000      NA     NA    0.000    0.000
+##     lhs op  rhs label   est    se       z
+## 1  RI_x =~ off1       1.000 0.000      NA
+## 2  RI_x =~ off2       1.000 0.000      NA
+## 3  RI_x =~ off3       1.000 0.000      NA
+## 4  RI_x =~ off4       1.000 0.000      NA
+## 5  RI_x =~ off5       1.000 0.000      NA
+## 6  RI_y =~ onl1       1.000 0.000      NA
+## 7  RI_y =~ onl2       1.000 0.000      NA
+## 8  RI_y =~ onl3       1.000 0.000      NA
+## 9  RI_y =~ onl4       1.000 0.000      NA
+## 10 RI_y =~ onl5       1.000 0.000      NA
+## 11  cx1 =~ off1       1.000 0.000      NA
+## 12  cx2 =~ off2       1.000 0.000      NA
+## 13  cx3 =~ off3       1.000 0.000      NA
+## 14  cx4 =~ off4       1.000 0.000      NA
+## 15  cx5 =~ off5       1.000 0.000      NA
+## 16  cy1 =~ onl1       1.000 0.000      NA
+## 17  cy2 =~ onl2       1.000 0.000      NA
+## 18  cy3 =~ onl3       1.000 0.000      NA
+## 19  cy4 =~ onl4       1.000 0.000      NA
+## 20  cy5 =~ onl5       1.000 0.000      NA
+## 21 off1 ~~ off1       0.000 0.000      NA
+## 22 off2 ~~ off2       0.000 0.000      NA
+## 23 off3 ~~ off3       0.000 0.000      NA
+## 24 off4 ~~ off4       0.000 0.000      NA
+## 25 off5 ~~ off5       0.000 0.000      NA
+## 26 onl1 ~~ onl1       0.000 0.000      NA
+## 27 onl2 ~~ onl2       0.000 0.000      NA
+## 28 onl3 ~~ onl3       0.000 0.000      NA
+## 29 onl4 ~~ onl4       0.000 0.000      NA
+## 30 onl5 ~~ onl5       0.000 0.000      NA
+## 31  cx2  ~  cx1     a 0.152 0.022   6.997
+## 32  cx2  ~  cy1     b 0.022 0.011   2.036
+## 33  cx3  ~  cx2     a 0.152 0.022   6.997
+## 34  cx3  ~  cy2     b 0.022 0.011   2.036
+## 35  cx4  ~  cx3     a 0.152 0.022   6.997
+## 36  cx4  ~  cy3     b 0.022 0.011   2.036
+## 37  cx5  ~  cx4     a 0.152 0.022   6.997
+## 38  cx5  ~  cy4     b 0.022 0.011   2.036
+## 39  cy2  ~  cx1     c 0.079 0.023   3.418
+## 40  cy2  ~  cy1     d 0.142 0.022   6.555
+## 41  cy3  ~  cx2     c 0.079 0.023   3.418
+## 42  cy3  ~  cy2     d 0.142 0.022   6.555
+## 43  cy4  ~  cx3     c 0.079 0.023   3.418
+## 44  cy4  ~  cy3     d 0.142 0.022   6.555
+## 45  cy5  ~  cx4     c 0.079 0.023   3.418
+## 46  cy5  ~  cy4     d 0.142 0.022   6.555
+## 47  cx1 ~~  cy1       0.176 0.022   7.910
+## 48  cx2 ~~  cy2       0.139 0.019   7.454
+## 49  cx3 ~~  cy3       0.071 0.014   4.962
+## 50  cx4 ~~  cy4       0.258 0.024  10.670
+## 51  cx5 ~~  cy5       0.025 0.014   1.756
+## 52  cx1 ~~  cx1       0.431 0.028  15.331
+## 53  cy1 ~~  cy1       0.869 0.037  23.649
+## 54  cx2 ~~  cx2       0.275 0.021  12.888
+## 55  cy2 ~~  cy2       0.735 0.036  20.144
+## 56  cx3 ~~  cx3       0.246 0.018  13.673
+## 57  cy3 ~~  cy3       0.588 0.026  22.857
+## 58  cx4 ~~  cx4       0.769 0.031  25.143
+## 59  cy4 ~~  cy4       0.949 0.034  27.589
+## 60  cx5 ~~  cx5       0.305 0.022  14.017
+## 61  cy5 ~~  cy5       0.747 0.031  23.978
+## 62 RI_x ~~ RI_x       0.161 0.016  10.220
+## 63 RI_y ~~ RI_y       0.581 0.025  22.835
+## 64 RI_x ~~ RI_y       0.202 0.015  13.343
+## 65 RI_x ~~  cx1       0.000 0.000      NA
+## 66 RI_x ~~  cy1       0.000 0.000      NA
+## 67 RI_y ~~  cx1       0.000 0.000      NA
+## 68 RI_y ~~  cy1       0.000 0.000      NA
+## 69 off1 ~1            1.327 0.014  93.848
+## 70 off2 ~1            1.234 0.013  97.101
+## 71 off3 ~1            1.217 0.010 117.731
+## 72 off4 ~1            1.541 0.017  90.026
+## 73 off5 ~1            1.209 0.012  99.232
+## 74 onl1 ~1            1.736 0.021  82.430
+## 75 onl2 ~1            1.636 0.021  79.135
+## 76 onl3 ~1            1.646 0.017  94.755
+## 77 onl4 ~1            1.904 0.021  88.599
+## 78 onl5 ~1            1.847 0.022  85.202
+## 79 RI_x ~1            0.000 0.000      NA
+## 80 RI_y ~1            0.000 0.000      NA
+## 81  cx1 ~1            0.000 0.000      NA
+## 82  cx2 ~1            0.000 0.000      NA
+## 83  cx3 ~1            0.000 0.000      NA
+## 84  cx4 ~1            0.000 0.000      NA
+## 85  cx5 ~1            0.000 0.000      NA
+## 86  cy1 ~1            0.000 0.000      NA
+## 87  cy2 ~1            0.000 0.000      NA
+## 88  cy3 ~1            0.000 0.000      NA
+## 89  cy4 ~1            0.000 0.000      NA
+## 90  cy5 ~1            0.000 0.000      NA
+##    pvalue ci.lower ci.upper
+## 1      NA    1.000    1.000
+## 2      NA    1.000    1.000
+## 3      NA    1.000    1.000
+## 4      NA    1.000    1.000
+## 5      NA    1.000    1.000
+## 6      NA    1.000    1.000
+## 7      NA    1.000    1.000
+## 8      NA    1.000    1.000
+## 9      NA    1.000    1.000
+## 10     NA    1.000    1.000
+## 11     NA    1.000    1.000
+## 12     NA    1.000    1.000
+## 13     NA    1.000    1.000
+## 14     NA    1.000    1.000
+## 15     NA    1.000    1.000
+## 16     NA    1.000    1.000
+## 17     NA    1.000    1.000
+## 18     NA    1.000    1.000
+## 19     NA    1.000    1.000
+## 20     NA    1.000    1.000
+## 21     NA    0.000    0.000
+## 22     NA    0.000    0.000
+## 23     NA    0.000    0.000
+## 24     NA    0.000    0.000
+## 25     NA    0.000    0.000
+## 26     NA    0.000    0.000
+## 27     NA    0.000    0.000
+## 28     NA    0.000    0.000
+## 29     NA    0.000    0.000
+## 30     NA    0.000    0.000
+## 31  0.000    0.109    0.194
+## 32  0.042    0.001    0.044
+## 33  0.000    0.109    0.194
+## 34  0.042    0.001    0.044
+## 35  0.000    0.109    0.194
+## 36  0.042    0.001    0.044
+## 37  0.000    0.109    0.194
+## 38  0.042    0.001    0.044
+## 39  0.001    0.034    0.124
+## 40  0.000    0.100    0.185
+## 41  0.001    0.034    0.124
+## 42  0.000    0.100    0.185
+## 43  0.001    0.034    0.124
+## 44  0.000    0.100    0.185
+## 45  0.001    0.034    0.124
+## 46  0.000    0.100    0.185
+## 47  0.000    0.132    0.219
+## 48  0.000    0.102    0.175
+## 49  0.000    0.043    0.098
+## 50  0.000    0.210    0.305
+## 51  0.079   -0.003    0.053
+## 52  0.000    0.376    0.486
+## 53  0.000    0.797    0.942
+## 54  0.000    0.233    0.317
+## 55  0.000    0.664    0.807
+## 56  0.000    0.211    0.281
+## 57  0.000    0.537    0.638
+## 58  0.000    0.709    0.829
+## 59  0.000    0.881    1.016
+## 60  0.000    0.263    0.348
+## 61  0.000    0.686    0.808
+## 62  0.000    0.130    0.192
+## 63  0.000    0.531    0.631
+## 64  0.000    0.172    0.232
+## 65     NA    0.000    0.000
+## 66     NA    0.000    0.000
+## 67     NA    0.000    0.000
+## 68     NA    0.000    0.000
+## 69  0.000    1.299    1.354
+## 70  0.000    1.209    1.259
+## 71  0.000    1.196    1.237
+## 72  0.000    1.507    1.574
+## 73  0.000    1.185    1.232
+## 74  0.000    1.695    1.778
+## 75  0.000    1.596    1.677
+## 76  0.000    1.612    1.680
+## 77  0.000    1.862    1.946
+## 78  0.000    1.805    1.890
+## 79     NA    0.000    0.000
+## 80     NA    0.000    0.000
+## 81     NA    0.000    0.000
+## 82     NA    0.000    0.000
+## 83     NA    0.000    0.000
+## 84     NA    0.000    0.000
+## 85     NA    0.000    0.000
+## 86     NA    0.000    0.000
+## 87     NA    0.000    0.000
+## 88     NA    0.000    0.000
+## 89     NA    0.000    0.000
+## 90     NA    0.000    0.000
 ```
 
 
@@ -2141,8 +2358,22 @@ Ambos interceptos aleatorios tienen una varianza significativa. Esto implica que
 
 Si la varianza no fuera distinta de 0, querría decir que han muy poca diferencias estables entre unidades y que cada individuo fluctúa en torno a la misma gran media en el tiempo.
 
-La covarianza entre los interceptos aleatorios es significativa ( `\(.202, SE=.015\)` ), lo que sugiere que los individuos que tienen una alta participación online también tienen una alta participación off-line.
+---
 
+# Interpretacion
+
+.pull-leftadd[
+&lt;div class="figure" style="text-align: left"&gt;
+&lt;img src="assets/0_3_1.png" alt="RI-CLPM: Estimaciones varianzas y covarianza RI" width="90%" /&gt;
+&lt;p class="caption"&gt;RI-CLPM: Estimaciones varianzas y covarianza RI&lt;/p&gt;
+&lt;/div&gt;
+]
+
+.pull-rightadd[ 
+
+La covarianza entre los interceptos aleatorios es significativa `\((.202, SE=.015)\)`, lo que sugiere que los individuos que tienen una alta participación online también tienen una alta participación off-line.
+
+]
 ---
 
 # Interpretacion
@@ -2225,79 +2456,18 @@ Tanto para participación off-line como para participación online son significa
 
 # Interpretacion
 
+.pull-leftadd[
+&lt;div class="figure" style="text-align: left"&gt;
+&lt;img src="assets/0_3_2.png" alt="RI-CLPM: Estimaciones paths autorregresivos y crosslagged" width="90%" /&gt;
+&lt;p class="caption"&gt;RI-CLPM: Estimaciones paths autorregresivos y crosslagged&lt;/p&gt;
+&lt;/div&gt;
+]
 
-```r
-kable(param[op=="~" &amp; rhs %in% c("cx1","cy1") &amp; lhs %in% c("cx2","cy2"), !"label"],
-      digits = 3)
-```
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; lhs &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; op &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; rhs &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; est &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; se &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; z &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; pvalue &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; ci.lower &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; ci.upper &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.152 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.997 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.109 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.194 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.036 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.042 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.044 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.079 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.418 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.034 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.124 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.142 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.555 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.100 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.185 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-Los coeficientes indican el grado en el cual una variable continua incrementándose, en términos de cambio individual, habiendo controlado por las características individuales estables. 
-
-#### **Efectos autorregresivos**: 
+.pull-rightadd[ 
 
 Una desviación de un punto sobre el nivel promedio de los individuos en participación off-line persiste en la siguiente medición como una desviación positiva de 0.155 puntos respecto a su puntaje esperado. En el caso de la participación on-line, una desviación de un punto sobre el nivel promedio individual persiste durante la siguiente medición como una desviación positiva de 0.142 sobre el nivel promedio individual.
+
+]
 
 ---
 
@@ -2379,79 +2549,21 @@ Los efectos cross-lagged nos muestran que existen efectos longitudinales recípr
 
 # Interpretacion
 
+.pull-leftadd[
+&lt;div class="figure" style="text-align: left"&gt;
+&lt;img src="assets/0_3_3.png" alt="RI-CLPM: Estimaciones paths autorregresivos y crosslagged" width="90%" /&gt;
+&lt;p class="caption"&gt;RI-CLPM: Estimaciones paths autorregresivos y crosslagged&lt;/p&gt;
+&lt;/div&gt;
+]
 
-```r
-kable(param[op=="~" &amp; rhs %in% c("cx1","cy1") &amp; lhs %in% c("cx2","cy2"), !"label"],
-      digits = 3)
-```
-
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; lhs &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; op &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; rhs &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; est &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; se &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; z &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; pvalue &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; ci.lower &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; ci.upper &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.152 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.997 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.109 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.194 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.036 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.042 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.044 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.079 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.418 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.034 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.124 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.142 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.555 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.100 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.185 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-#### **Efectos cross-lagged**: 
+.pull-rightadd[ 
 
 Se observa que una desviación de un punto sobre el nivel promedio de los individuos en participación off-line predice una desviación positiva de 0.079 en la participación on-line durante la siguiente medición, controlando por las desviaciones respecto al puntaje esperado en participación on-line. Correspondientemente, una desviación de un punto sobre el nivel promedio individual en participación on-line se asocia a una desviación positiva de 0.022 en la participación off-line durante la siguiente medición, controlando por las desviaciones respecto al puntaje esperado en participación off-line.
 
+]
+
 ---
+
 
 # Referencias
 
@@ -2519,6 +2631,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

@@ -1,7 +1,9 @@
 ---
 title: "Random Intercept Cross Lagged Panel Models"
-subtitle: "2da Parte: Estimación en Lavaan"
-author: "Roberto González (rgonzale[at]uc.cl), Pía Carozzi (pjcarozzi[at]uc.cl)"
+subtitle: "Estimación en Lavaan"
+author: 
+ - Roberto González (rgonzale@uc.cl)
+ - Pía Carozzi (pjcarozzi@uc.cl)
 date: "2022-07-22 (Actualización: `r Sys.Date()`)"
 output:
   xaringan::moon_reader:
@@ -29,7 +31,7 @@ library(lavaan)
 library(kableExtra)
 library(RefManageR)
 
-here::i_am("01_slides/RICLPM22_2.Rmd")
+here::i_am("docs/index.Rmd")
 
 xaringanExtra::use_panelset()
 
@@ -112,7 +114,7 @@ Las medidas que utilizaremos son las siguientes:
 # Modelo
 .pull-leftadd[
 ```{r f3modelo, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_1_1.png")
 ```
 ]
 
@@ -129,7 +131,7 @@ $ON_{it}$: **Puntajes observados** en participación online para el individuo $i
 # Modelo
 .pull-leftadd[
 ```{r f4modelo, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_1_2.png")
 ```
 ]
 
@@ -148,7 +150,7 @@ Los interceptos aleatorios representan el componente **between**: son las desvia
 # Modelo
 .pull-leftadd[
 ```{r f5modelo, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_1_3.png")
 ```
 ]
 
@@ -167,7 +169,7 @@ Constituyen las **fluctuaciones intra-persona**, el componente _within_.
 # Modelo
 .pull-leftadd[
 ```{r f6modelo, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_1_3.png")
 ```
 ]
 
@@ -314,7 +316,7 @@ La especificación del RI-CLPM cuenta con 4 partes:
 
 .pull-leftadd[
 ```{r f2estimacion, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_2_1.png")
 ```
 ]
 
@@ -366,7 +368,7 @@ between <- '
 
 .pull-leftadd[
 ```{r f3estimacion, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_2_2.png")
 ```
 ]
 
@@ -388,17 +390,6 @@ Variables latentes, explicadas por sus respectivas medidas observadas en cada oc
 .small2[
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
-```{r echo=TRUE}
-between <- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
-           '
-
-```
-] 
-
 .panel[.panel-name[Componente within, fluctuaciones intra-individuos.]
 ```{r echo=TRUE}
 within  <- '
@@ -428,6 +419,17 @@ within  <- '
           '
 
 ```
+]
+
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
+```{r echo=TRUE}
+between <- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+           '
+
+```
 ] ] ]
 
 
@@ -441,7 +443,7 @@ Se constriñen las varianzas del error de medición a cero, no hay error de medi
 
 .pull-leftadd[
 ```{r f4estimacion, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_2_3.png")
 ```
 ]
 
@@ -460,12 +462,18 @@ Efectos lagged autorregresivos y crosslagged.
 .small2[
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
+.panel[.panel-name[Las regresiones entre los componentes _within_.]
 ```{r echo=TRUE}
-between <- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+efectos  <- '
+              # Estimar los efectos lagged
+               cx2 ~ cx1 + cy1
+               cx3 ~ cx2 + cy2
+               cx4 ~ cx3 + cy3
+               cx5 ~ cx4 + cy4
+               cy2 ~ cx1 + cy1
+               cy3 ~ cx2 + cy2
+               cy4 ~ cx3 + cy3
+               cy5 ~ cx4 + cy4
            '
 
 ```
@@ -500,20 +508,14 @@ within  <- '
           '
 
 ```
-] 
+]
 
-.panel[.panel-name[Las regresiones entre los componentes _within_.]
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
 ```{r echo=TRUE}
-efectos  <- '
-              # Estimar los efectos lagged
-               cx2 ~ cx1 + cy1
-               cx3 ~ cx2 + cy2
-               cx4 ~ cx3 + cy3
-               cx5 ~ cx4 + cy4
-               cy2 ~ cx1 + cy1
-               cy3 ~ cx2 + cy2
-               cy4 ~ cx3 + cy3
-               cy5 ~ cx4 + cy4
+between <- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
            '
 
 ```
@@ -527,7 +529,7 @@ efectos  <- '
 
 .pull-leftadd[
 ```{r f5estimacion, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_2_4.png")
 ```
 ]
 
@@ -547,12 +549,34 @@ Los componentes within estén correlacionados en cada $t$, tanto en la primera o
 
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
+.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
 ```{r echo=TRUE}
-between <- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+covarianza1  <- '
+                 # Estimar la covarianza entre los componentes within t=1
+                 cx1 ~~ cy1
+                 
+                 # Estimar las covarianzas entre los residuos del componente within
+                 cx2 ~~ cy2
+                 cx3 ~~ cy3
+                 cx4 ~~ cy4
+                 cx5 ~~ cy5
+              '
+```
+] 
+
+
+.panel[.panel-name[Las regresiones entre los componentes _within_.]
+```{r echo=TRUE}
+efectos  <- '
+              # Estimar los efectos lagged
+               cx2 ~ cx1 + cy1
+               cx3 ~ cx2 + cy2
+               cx4 ~ cx3 + cy3
+               cx5 ~ cx4 + cy4
+               cy2 ~ cx1 + cy1
+               cy3 ~ cx2 + cy2
+               cy4 ~ cx3 + cy3
+               cy5 ~ cx4 + cy4
            '
 
 ```
@@ -587,37 +611,16 @@ within  <- '
           '
 
 ```
-] 
-
-.panel[.panel-name[Las regresiones entre los componentes _within_.]
-```{r echo=TRUE}
-efectos  <- '
-              # Estimar los efectos lagged
-               cx2 ~ cx1 + cy1
-               cx3 ~ cx2 + cy2
-               cx4 ~ cx3 + cy3
-               cx5 ~ cx4 + cy4
-               cy2 ~ cx1 + cy1
-               cy3 ~ cx2 + cy2
-               cy4 ~ cx3 + cy3
-               cy5 ~ cx4 + cy4
-           '
-
-```
 ]
 
-.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
 ```{r echo=TRUE}
-covarianza1  <- '
-                 # Estimar la covarianza entre los componentes within t=1
-                 cx1 ~~ cy1
-                 
-                 # Estimar las covarianzas entre los residuos del componente within
-                 cx2 ~~ cy2
-                 cx3 ~~ cy3
-                 cx4 ~~ cy4
-                 cx5 ~~ cy5
-              '
+between <- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+           '
+
 ```
 ] ] ]
 
@@ -630,7 +633,7 @@ covarianza1  <- '
 
 .pull-leftadd[
 ```{r f6estimacion, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM conceptual de las asociaciones entre Participación Offline y Participación On-line', out.width='90%'}
-knitr::include_graphics("assets/3_RICLPM.png")
+knitr::include_graphics("assets/0_2_5.png")
 ```
 ]
 
@@ -657,12 +660,52 @@ Las observaciones por lo general empiezan en un punto arbitrario del tiempo dura
 
 .panelset.sideways[
 
-.panel[.panel-name[Componente between, los interceptos aleatorios.]
+.panel[.panel-name[Covarianzas relevantes en los componentes between y within (II)]
 ```{r echo=TRUE}
-between <- ' 
-             # Crear los componentes between
-             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
-             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
+covarianza2  <- '
+                 # Estimar la varianza y covarianza entre los RI. 
+                 RI_x ~~ RI_x
+                 RI_y ~~ RI_y
+                 RI_x ~~ RI_y
+                  
+                 # Fijar la correlacion entre los RI y componentes within t=1 a cero 
+                 RI_x ~~ 0*cx1
+                 RI_x ~~ 0*cy1
+                 RI_y ~~ 0*cx1
+                 RI_y ~~ 0*cy1
+              '
+```
+] 
+
+
+.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
+```{r echo=TRUE}
+covarianza1  <- '
+                 # Estimar la covarianza entre los componentes within t=1
+                 cx1 ~~ cy1
+                 
+                 # Estimar las covarianzas entre los residuos del componente within
+                 cx2 ~~ cy2
+                 cx3 ~~ cy3
+                 cx4 ~~ cy4
+                 cx5 ~~ cy5
+              '
+```
+] 
+
+
+.panel[.panel-name[Las regresiones entre los componentes _within_.]
+```{r echo=TRUE}
+efectos  <- '
+              # Estimar los efectos lagged
+               cx2 ~ cx1 + cy1
+               cx3 ~ cx2 + cy2
+               cx4 ~ cx3 + cy3
+               cx5 ~ cx4 + cy4
+               cy2 ~ cx1 + cy1
+               cy3 ~ cx2 + cy2
+               cy4 ~ cx3 + cy3
+               cy5 ~ cx4 + cy4
            '
 
 ```
@@ -697,66 +740,16 @@ within  <- '
           '
 
 ```
-] 
+]
 
-.panel[.panel-name[Las regresiones entre los componentes _within_.]
+.panel[.panel-name[Componente between, los interceptos aleatorios.]
 ```{r echo=TRUE}
-efectos  <- '
-              # Estimar los efectos lagged
-               cx2 ~ cx1 + cy1
-               cx3 ~ cx2 + cy2
-               cx4 ~ cx3 + cy3
-               cx5 ~ cx4 + cy4
-               cy2 ~ cx1 + cy1
-               cy3 ~ cx2 + cy2
-               cy4 ~ cx3 + cy3
-               cy5 ~ cx4 + cy4
+between <- ' 
+             # Crear los componentes between
+             RI_x =~ 1*off1 + 1*off2 + 1*off3 + 1*off4 + 1*off5
+             RI_y =~ 1*onl1 + 1*onl2 + 1*onl3 + 1*onl4 + 1*onl5
            '
 
-```
-]
-
-.panel[.panel-name[Covarianzas relevantes en los componentes between y within (I)]
-```{r echo=TRUE}
-covarianza1  <- '
-                 # Estimar la covarianza entre los componentes within t=1
-                 cx1 ~~ cy1
-                 
-                 # Estimar las covarianzas entre los residuos del componente within
-                 cx2 ~~ cy2
-                 cx3 ~~ cy3
-                 cx4 ~~ cy4
-                 cx5 ~~ cy5
-                 
-                 # Estimar las varianzas residuales del componente within
-                 cx1 ~~ cx1 # Varianzas
-                 cy1 ~~ cy1 
-                 cx2 ~~ cx2 # Varianzas residuales
-                 cy2 ~~ cy2 
-                 cx3 ~~ cx3 
-                 cy3 ~~ cy3 
-                 cx4 ~~ cx4 
-                 cy4 ~~ cy4 
-                 cx5 ~~ cx5
-                 cy5 ~~ cy5  
-               '
-```
-]
-
-.panel[.panel-name[Covarianzas relevantes en los componentes between y within (II)]
-```{r echo=TRUE}
-covarianza2  <- '
-                 # Estimar la varianza y covarianza entre los RI. 
-                 RI_x ~~ RI_x
-                 RI_y ~~ RI_y
-                 RI_x ~~ RI_y
-                  
-                 # Fijar la correlacion entre los RI y componentes within t=1 a cero 
-                 RI_x ~~ 0*cx1
-                 RI_x ~~ 0*cy1
-                 RI_y ~~ 0*cx1
-                 RI_y ~~ 0*cy1
-              '
 ```
 ] ] ]
 
@@ -852,19 +845,25 @@ modelo_lavaan <- '
 Estimamos el objeto `modelo_lavaan` usando la función `lavaan( )`
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE}
-fit_lavaan <- lavaan(modelo_lavaan, data = elsoc, estimator = "MLR", missing = "FIML",
+fit_lavaan <- lavaan(modelo_lavaan, data=elsoc, estimator = "MLR", missing = "FIML",
                      meanstructure = T, int.ov.free = T)
 ```
 
 También es posible realizar la estimación a partir de varios objetos:
 
-```{r echo=TRUE, message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 fit_lavaan2 <- lavaan(model = c(between, within, efectos, covarianza1, covarianza2),
                       data = elsoc, estimator = "MLR", missing = "FIML",
                       meanstructure = T, int.ov.free = T)
 ```
 
-El estimador default de `lavaan` es maximum maximum likelihood (`estimator = "ML"`), pero podemos especificar otros estimadores alternativos disponibles en `lavaan` (GLS, WLS, DWLS, ULS, DLS, PML, etc.). En este caso, usamos una estimación de maximum likelihood con errores estándar robustos (Huber-White) y estadísticos de prueba escalados (equivalentes a los estadísticos de prueba de Yuan-Bentler).
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=TRUE}
+fit_lavaan2 <- lavaan(model = c(between, within, efectos, covarianza1, covarianza2),
+                      data = elsoc, estimator = "MLR", missing = "FIML",
+                      meanstructure = T, int.ov.free = T)
+```
+
+El estimador default de `lavaan` es maximum likelihood (`estimator = "ML"`), pero podemos especificar otros estimadores alternativos disponibles en `lavaan` (GLS, WLS, DWLS, ULS, DLS, PML, etc.). En este caso, usamos una estimación de maximum likelihood con errores estándar robustos (Huber-White) y estadísticos de prueba escalados (equivalentes a los estadísticos de prueba de Yuan-Bentler).
 
 El comportamiento default de de `lavaan` frente a los valores perdidos es listwise deletion. Si los datos son MCAR (missing completely at random) o MAR (missing at random), podemos estimar caso a caso usando full information maximum likelihood para lidiar con los casos perdidos.
 
@@ -1017,7 +1016,7 @@ varcov <- '
 
 .panel[.panel-name[Efectos A]
 ```{r echo=TRUE}
-a1 <- ' 
+a1 <- ' # Sin constreñir
            cx2 ~ cx1
            cx3 ~ cx2
            cx4 ~ cx3
@@ -1030,7 +1029,7 @@ a1 <- '
 ```
 
 ```{r echo=TRUE}
-a2 <- ' 
+a2 <- ' # Constreñido
            cx2 ~ a*cx1
            cx3 ~ a*cx2
            cx4 ~ a*cx3
@@ -1045,7 +1044,7 @@ a2 <- '
 
 .panel[.panel-name[Efectos B]
 ```{r echo=TRUE}
-b1 <- ' 
+b1 <- ' # Sin constreñir
            cx2 ~ cx1
            cx3 ~ cx2 
            cx4 ~ cx3
@@ -1058,7 +1057,7 @@ b1 <- '
 ```
 
 ```{r echo=TRUE}
-b2 <- ' 
+b2 <- ' # Constreñido
            cx2 ~ a*cx1
            cx3 ~ a*cx2
            cx4 ~ a*cx3
@@ -1073,7 +1072,7 @@ b2 <- '
 
 .panel[.panel-name[Efectos C]
 ```{r echo=TRUE}
-c1 <- ' 
+c1 <- ' # Sin constreñir
            cx2 ~ cx1 + cy1
            cx3 ~ cx2 + cy2 
            cx4 ~ cx3 + cy3
@@ -1086,7 +1085,7 @@ c1 <- '
 ```
 
 ```{r echo=TRUE}
-c2 <- ' 
+c2 <- ' # Constreñido
            cx2 ~ a*cx1 + b*cy1
            cx3 ~ a*cx2 + b*cy2 
            cx4 ~ a*cx3 + b*cy3
@@ -1101,7 +1100,7 @@ c2 <- '
 
 .panel[.panel-name[Efectos D]
 ```{r echo=TRUE}
-d1 <- ' 
+d1 <- ' # Sin constreñir
            cx2 ~ cx1 + cy1
            cx3 ~ cx2 + cy2 
            cx4 ~ cx3 + cy3
@@ -1114,7 +1113,7 @@ d1 <- '
 ```
 
 ```{r echo=TRUE}
-d2 <- ' 
+d2 <- ' # Constreñido
            cx2 ~ a*cx1 + b*cy1
            cx3 ~ a*cx2 + b*cy2 
            cx4 ~ a*cx3 + b*cy3
@@ -1269,8 +1268,21 @@ Ambos interceptos aleatorios tienen una varianza significativa. Esto implica que
 
 Si la varianza no fuera distinta de 0, querría decir que han muy poca diferencias estables entre unidades y que cada individuo fluctúa en torno a la misma gran media en el tiempo.
 
-La covarianza entre los interceptos aleatorios es significativa ( $.202, SE=.015$ ), lo que sugiere que los individuos que tienen una alta participación online también tienen una alta participación off-line.
+---
 
+# Interpretacion
+
+.pull-leftadd[
+```{r f1inter, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM: Estimaciones varianzas y covarianza RI', out.width='90%'}
+knitr::include_graphics("assets/0_3_1.png")
+```
+]
+
+.pull-rightadd[ 
+
+La covarianza entre los interceptos aleatorios es significativa $(.202, SE=.015)$, lo que sugiere que los individuos que tienen una alta participación online también tienen una alta participación off-line.
+
+]
 ---
 
 # Interpretacion
@@ -1290,16 +1302,17 @@ Tanto para participación off-line como para participación online son significa
 
 # Interpretacion
 
-```{r}
-kable(param[op=="~" & rhs %in% c("cx1","cy1") & lhs %in% c("cx2","cy2"), !"label"],
-      digits = 3)
+.pull-leftadd[
+```{r f2inter, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM: Estimaciones paths autorregresivos y crosslagged', out.width='90%'}
+knitr::include_graphics("assets/0_3_2.png")
 ```
+]
 
-Los coeficientes indican el grado en el cual una variable continua incrementándose, en términos de cambio individual, habiendo controlado por las características individuales estables. 
-
-#### **Efectos autorregresivos**: 
+.pull-rightadd[ 
 
 Una desviación de un punto sobre el nivel promedio de los individuos en participación off-line persiste en la siguiente medición como una desviación positiva de 0.155 puntos respecto a su puntaje esperado. En el caso de la participación on-line, una desviación de un punto sobre el nivel promedio individual persiste durante la siguiente medición como una desviación positiva de 0.142 sobre el nivel promedio individual.
+
+]
 
 ---
 
@@ -1318,16 +1331,20 @@ Los efectos cross-lagged nos muestran que existen efectos longitudinales recípr
 
 # Interpretacion
 
-```{r}
-kable(param[op=="~" & rhs %in% c("cx1","cy1") & lhs %in% c("cx2","cy2"), !"label"],
-      digits = 3)
+.pull-leftadd[
+```{r f3inter, echo=FALSE, fig.align='left', fig.asp=.75, fig.cap='RI-CLPM: Estimaciones paths autorregresivos y crosslagged', out.width='90%'}
+knitr::include_graphics("assets/0_3_3.png")
 ```
+]
 
-#### **Efectos cross-lagged**: 
+.pull-rightadd[ 
 
 Se observa que una desviación de un punto sobre el nivel promedio de los individuos en participación off-line predice una desviación positiva de 0.079 en la participación on-line durante la siguiente medición, controlando por las desviaciones respecto al puntaje esperado en participación on-line. Correspondientemente, una desviación de un punto sobre el nivel promedio individual en participación on-line se asocia a una desviación positiva de 0.022 en la participación off-line durante la siguiente medición, controlando por las desviaciones respecto al puntaje esperado en participación off-line.
 
+]
+
 ---
+
 
 # Referencias
 
