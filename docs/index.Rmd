@@ -5,6 +5,7 @@ author:
  - Roberto González (rgonzale@uc.cl)
  - Pía Carozzi (pjcarozzi@uc.cl)
 date: "2022-07-22 (Actualización: `r Sys.Date()`)"
+
 output:
   xaringan::moon_reader:
     css: ["default", "./assets/slides.css", "./assets/slides-fonts.css"]
@@ -1345,6 +1346,11 @@ Se observa que una desviación de un punto sobre el nivel promedio de los indivi
 
 ---
 
+class: inverse, center, middle
+
+# Referencias
+
+---
 
 # Referencias
 
@@ -1362,4 +1368,20 @@ Mulder, J. D., & Hamaker, E. L. (2021). Three Extensions of the Random Intercept
 
 Usami, S. (2021). On the Differences between General Cross-Lagged Panel Model and Random-Intercept Cross-Lagged Panel Model: Interpretation of Cross-Lagged Parameters and Model Choice. Structural Equation Modeling, 28(3), 331–344. https://doi.org/10.1080/10705511.2020.1821690
 
+---
 
+# Referencias
+
+- Dataverse: [Estudio Longitudinal Social de Chile](https://dataverse.harvard.edu/dataverse/elsoc)
+
+- Diapositivas: [https://pjcarozzi.github.io/RICLPM2022/](https://pjcarozzi.github.io/RICLPM2022/)
+
+- Repositorio : [https://github.com/pjcarozzi/RICLPM2022](https://github.com/pjcarozzi/RICLPM2022)
+
+---
+
+class: inverse, center, middle
+
+# Gracias
+
+---
