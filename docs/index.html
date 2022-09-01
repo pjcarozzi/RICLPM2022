@@ -16,21 +16,13 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-.title[
 # Random Intercept Cross Lagged Panel Models
-]
-.subtitle[
 ## Estimación en Lavaan
-]
-.author[
-### Roberto González (<a href="mailto:rgonzale@uc.cl" class="email">rgonzale@uc.cl</a>)
-]
-.author[
-### Pía Carozzi (<a href="mailto:pjcarozzi@uc.cl" class="email">pjcarozzi@uc.cl</a>)
-]
-.date[
-### 2022-07-22 (Actualización: 2022-07-22)
-]
+### Roberto González (<a href="mailto:rgonzale@uc.cl"
+class="email">rgonzale@uc.cl</a>)
+### Pía Carozzi (<a href="mailto:pjcarozzi@uc.cl"
+class="email">pjcarozzi@uc.cl</a>)
+### 2022-07-22 (Actualización: 2022-08-31)
 
 ---
 
@@ -293,7 +285,7 @@ Previo: Preparar los datos.
 # Data
 load(url("https://dataverse.harvard.edu/api/access/datafile/6160173"))
 setDT(elsoc_long_2016_2021)
-
+elsoc_long_2016_2021 &lt;- elsoc_long_2016_2021[muestra==1,]
 # Long to wide
 elsoc &lt;- dcast(elsoc_long_2016_2021, idencuesta ~ ola, value.var = c("c08_02","c08_04","m0_edad","m01","m0_sexo"))
 
@@ -325,19 +317,19 @@ summarytools::descr(elsoc[-1], order="p", stats = "common", transpose = T, style
 
 |   &amp;nbsp; |  Mean | Std.Dev |   Min | Median |   Max | N.Valid | Pct.Valid |
 |---------:|------:|--------:|------:|-------:|------:|--------:|----------:|
-| **off1** |  1.31 |    0.78 |  1.00 |   1.00 |  5.00 | 2922.00 |     65.71 |
-| **off2** |  1.22 |    0.64 |  1.00 |   1.00 |  5.00 | 2473.00 |     55.61 |
-| **off3** |  1.22 |    0.64 |  1.00 |   1.00 |  5.00 | 3745.00 |     84.21 |
-| **off4** |  1.54 |    1.02 |  1.00 |   1.00 |  5.00 | 3415.00 |     76.79 |
-| **off5** |  1.22 |    0.67 |  1.00 |   1.00 |  5.00 | 2732.00 |     61.43 |
-| **onl1** |  1.71 |    1.18 |  1.00 |   1.00 |  5.00 | 2918.00 |     65.62 |
-| **onl2** |  1.60 |    1.09 |  1.00 |   1.00 |  5.00 | 2473.00 |     55.61 |
-| **onl3** |  1.64 |    1.08 |  1.00 |   1.00 |  5.00 | 3743.00 |     84.17 |
-| **onl4** |  1.90 |    1.30 |  1.00 |   1.00 |  5.00 | 3417.00 |     76.84 |
-| **onl5** |  1.88 |    1.23 |  1.00 |   1.00 |  5.00 | 2732.00 |     61.43 |
-| **edad** | 46.09 |   15.29 | 18.00 |  46.00 | 88.00 | 2927.00 |     65.82 |
-| **educ** |  5.26 |    2.20 |  1.00 |   5.00 | 10.00 | 2925.00 |     65.77 |
-| **sexo** |  1.60 |    0.49 |  1.00 |   2.00 |  2.00 | 2927.00 |     65.82 |
+| **off1** |  1.31 |    0.78 |  1.00 |   1.00 |  5.00 | 2922.00 |     99.80 |
+| **off2** |  1.22 |    0.64 |  1.00 |   1.00 |  5.00 | 2473.00 |     84.46 |
+| **off3** |  1.18 |    0.59 |  1.00 |   1.00 |  5.00 | 2227.00 |     76.06 |
+| **off4** |  1.50 |    0.99 |  1.00 |   1.00 |  5.00 | 2153.00 |     73.53 |
+| **off5** |  1.20 |    0.64 |  1.00 |   1.00 |  5.00 | 1739.00 |     59.39 |
+| **onl1** |  1.71 |    1.18 |  1.00 |   1.00 |  5.00 | 2918.00 |     99.66 |
+| **onl2** |  1.60 |    1.09 |  1.00 |   1.00 |  5.00 | 2473.00 |     84.46 |
+| **onl3** |  1.59 |    1.06 |  1.00 |   1.00 |  5.00 | 2225.00 |     75.99 |
+| **onl4** |  1.86 |    1.28 |  1.00 |   1.00 |  5.00 | 2153.00 |     73.53 |
+| **onl5** |  1.84 |    1.22 |  1.00 |   1.00 |  5.00 | 1739.00 |     59.39 |
+| **edad** | 46.09 |   15.29 | 18.00 |  46.00 | 88.00 | 2927.00 |     99.97 |
+| **educ** |  5.26 |    2.20 |  1.00 |   5.00 | 10.00 | 2925.00 |     99.90 |
+| **sexo** |  1.60 |    0.49 |  1.00 |   2.00 |  2.00 | 2927.00 |     99.97 |
 ] 
 
 ---
@@ -929,66 +921,66 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ```
 
 ```
-## lavaan 0.6-11 ended normally after 54 iterations
+## lavaan 0.6-10 ended normally after 49 iterations
 ## 
 ##   Estimator                                         ML
 ##   Optimization method                           NLMINB
 ##   Number of model parameters                        44
 ##                                                       
 ##                                                   Used       Total
-##   Number of observations                          4446        4447
-##   Number of missing patterns                        28            
+##   Number of observations                          2927        2928
+##   Number of missing patterns                        23            
 ##                                                                   
 ## Model Test User Model:
 ##                                                Standard      Robust
-##   Test Statistic                                258.692     149.608
+##   Test Statistic                                254.515     144.094
 ##   Degrees of freedom                                 21          21
 ##   P-value (Chi-square)                            0.000       0.000
-##   Scaling correction factor                                   1.729
+##   Scaling correction factor                                   1.766
 ##        Yuan-Bentler correction (Mplus variant)                     
 ## 
 ## Model Test Baseline Model:
 ## 
-##   Test statistic                              8723.432    4676.033
+##   Test statistic                              6864.635    3632.030
 ##   Degrees of freedom                                45          45
 ##   P-value                                        0.000       0.000
-##   Scaling correction factor                                  1.866
+##   Scaling correction factor                                  1.890
 ## 
 ## User Model versus Baseline Model:
 ## 
-##   Comparative Fit Index (CFI)                    0.973       0.972
-##   Tucker-Lewis Index (TLI)                       0.941       0.940
+##   Comparative Fit Index (CFI)                    0.966       0.966
+##   Tucker-Lewis Index (TLI)                       0.927       0.926
 ##                                                                   
-##   Robust Comparative Fit Index (CFI)                         0.974
-##   Robust Tucker-Lewis Index (TLI)                            0.945
+##   Robust Comparative Fit Index (CFI)                         0.968
+##   Robust Tucker-Lewis Index (TLI)                            0.931
 ## 
 ## Loglikelihood and Information Criteria:
 ## 
-##   Loglikelihood user model (H0)             -37086.699  -37086.699
-##   Scaling correction factor                                  2.032
+##   Loglikelihood user model (H0)             -27262.196  -27262.196
+##   Scaling correction factor                                  2.089
 ##       for the MLR correction                                      
-##   Loglikelihood unrestricted model (H1)     -36957.353  -36957.353
-##   Scaling correction factor                                  1.934
+##   Loglikelihood unrestricted model (H1)     -27134.938  -27134.938
+##   Scaling correction factor                                  1.985
 ##       for the MLR correction                                      
 ##                                                                   
-##   Akaike (AIC)                               74261.397   74261.397
-##   Bayesian (BIC)                             74542.987   74542.987
-##   Sample-size adjusted Bayesian (BIC)        74403.172   74403.172
+##   Akaike (AIC)                               54612.392   54612.392
+##   Bayesian (BIC)                             54875.589   54875.589
+##   Sample-size adjusted Bayesian (BIC)        54735.784   54735.784
 ## 
 ## Root Mean Square Error of Approximation:
 ## 
-##   RMSEA                                          0.050       0.037
-##   90 Percent confidence interval - lower         0.045       0.033
-##   90 Percent confidence interval - upper         0.056       0.041
-##   P-value RMSEA &lt;= 0.05                          0.433       1.000
+##   RMSEA                                          0.062       0.045
+##   90 Percent confidence interval - lower         0.055       0.040
+##   90 Percent confidence interval - upper         0.069       0.050
+##   P-value RMSEA &lt;= 0.05                          0.002       0.949
 ##                                                                   
-##   Robust RMSEA                                               0.049
-##   90 Percent confidence interval - lower                     0.042
-##   90 Percent confidence interval - upper                     0.056
+##   Robust RMSEA                                               0.059
+##   90 Percent confidence interval - lower                     0.051
+##   90 Percent confidence interval - upper                     0.069
 ## 
 ## Standardized Root Mean Square Residual:
 ## 
-##   SRMR                                           0.056       0.056
+##   SRMR                                           0.061       0.061
 ## 
 ## Parameter Estimates:
 ## 
@@ -997,380 +989,136 @@ summary(fit_lavaan, fit.measures = T, ci = T, standardized = T)
 ##   Observed information based on                Hessian
 ## 
 ## Latent Variables:
-##                    Estimate  Std.Err
-##   RI_x =~                           
-##     off1              1.000         
-##     off2              1.000         
-##     off3              1.000         
-##     off4              1.000         
-##     off5              1.000         
-##   RI_y =~                           
-##     onl1              1.000         
-##     onl2              1.000         
-##     onl3              1.000         
-##     onl4              1.000         
-##     onl5              1.000         
-##   cx1 =~                            
-##     off1              1.000         
-##   cx2 =~                            
-##     off2              1.000         
-##   cx3 =~                            
-##     off3              1.000         
-##   cx4 =~                            
-##     off4              1.000         
-##   cx5 =~                            
-##     off5              1.000         
-##   cy1 =~                            
-##     onl1              1.000         
-##   cy2 =~                            
-##     onl2              1.000         
-##   cy3 =~                            
-##     onl3              1.000         
-##   cy4 =~                            
-##     onl4              1.000         
-##   cy5 =~                            
-##     onl5              1.000         
-##   z-value  P(&gt;|z|) ci.lower ci.upper
-##                                     
-##                       1.000    1.000
-##                       1.000    1.000
-##                       1.000    1.000
-##                       1.000    1.000
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                       1.000    1.000
-##                       1.000    1.000
-##                       1.000    1.000
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##                                     
-##                       1.000    1.000
-##    Std.lv  Std.all
-##                   
-##     0.387    0.508
-##     0.387    0.590
-##     0.387    0.601
-##     0.387    0.391
-##     0.387    0.556
-##                   
-##     0.749    0.637
-##     0.749    0.680
-##     0.749    0.688
-##     0.749    0.589
-##     0.749    0.624
-##                   
-##     0.656    0.862
-##                   
-##     0.529    0.807
-##                   
-##     0.514    0.799
-##                   
-##     0.909    0.920
-##                   
-##     0.577    0.831
-##                   
-##     0.905    0.770
-##                   
-##     0.806    0.733
-##                   
-##     0.789    0.726
-##                   
-##     1.028    0.808
-##                   
-##     0.938    0.782
+##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper   Std.lv  Std.all
+##   RI_x =~                                                                                 
+##     off1              1.000                               1.000    1.000    0.373    0.492
+##     off2              1.000                               1.000    1.000    0.373    0.577
+##     off3              1.000                               1.000    1.000    0.373    0.625
+##     off4              1.000                               1.000    1.000    0.373    0.395
+##     off5              1.000                               1.000    1.000    0.373    0.557
+##   RI_y =~                                                                                 
+##     onl1              1.000                               1.000    1.000    0.739    0.631
+##     onl2              1.000                               1.000    1.000    0.739    0.676
+##     onl3              1.000                               1.000    1.000    0.739    0.691
+##     onl4              1.000                               1.000    1.000    0.739    0.595
+##     onl5              1.000                               1.000    1.000    0.739    0.620
+##   cx1 =~                                                                                  
+##     off1              1.000                               1.000    1.000    0.659    0.871
+##   cx2 =~                                                                                  
+##     off2              1.000                               1.000    1.000    0.527    0.817
+##   cx3 =~                                                                                  
+##     off3              1.000                               1.000    1.000    0.465    0.781
+##   cx4 =~                                                                                  
+##     off4              1.000                               1.000    1.000    0.866    0.919
+##   cx5 =~                                                                                  
+##     off5              1.000                               1.000    1.000    0.555    0.830
+##   cy1 =~                                                                                  
+##     onl1              1.000                               1.000    1.000    0.908    0.776
+##   cy2 =~                                                                                  
+##     onl2              1.000                               1.000    1.000    0.804    0.737
+##   cy3 =~                                                                                  
+##     onl3              1.000                               1.000    1.000    0.772    0.723
+##   cy4 =~                                                                                  
+##     onl4              1.000                               1.000    1.000    0.998    0.804
+##   cy5 =~                                                                                  
+##     onl5              1.000                               1.000    1.000    0.936    0.785
 ## 
 ## Regressions:
-##                    Estimate  Std.Err
-##   cx2 ~                             
-##     cx1               0.135    0.044
-##     cy1              -0.022    0.021
-##   cx3 ~                             
-##     cx2               0.186    0.062
-##     cy2              -0.013    0.026
-##   cx4 ~                             
-##     cx3               0.276    0.064
-##     cy3               0.167    0.034
-##   cx5 ~                             
-##     cx4               0.169    0.024
-##     cy4               0.027    0.017
-##   cy2 ~                             
-##     cx1               0.014    0.049
-##     cy1              -0.004    0.036
-##   cy3 ~                             
-##     cx2               0.143    0.067
-##     cy2               0.083    0.044
-##   cy4 ~                             
-##     cx3               0.088    0.059
-##     cy3               0.249    0.040
-##   cy5 ~                             
-##     cx4               0.125    0.029
-##     cy4               0.254    0.028
-##   z-value  P(&gt;|z|) ci.lower ci.upper
-##                                     
-##     3.089    0.002    0.049    0.221
-##    -1.025    0.305   -0.063    0.020
-##                                     
-##     2.978    0.003    0.064    0.308
-##    -0.485    0.627   -0.064    0.039
-##                                     
-##     4.343    0.000    0.151    0.401
-##     4.896    0.000    0.100    0.233
-##                                     
-##     6.935    0.000    0.121    0.216
-##     1.572    0.116   -0.007    0.060
-##                                     
-##     0.287    0.774   -0.081    0.109
-##    -0.114    0.909   -0.075    0.067
-##                                     
-##     2.118    0.034    0.011    0.275
-##     1.897    0.058   -0.003    0.168
-##                                     
-##     1.485    0.138   -0.028    0.204
-##     6.162    0.000    0.170    0.328
-##                                     
-##     4.393    0.000    0.070    0.181
-##     9.151    0.000    0.200    0.309
-##    Std.lv  Std.all
-##                   
-##     0.168    0.168
-##    -0.037   -0.037
-##                   
-##     0.191    0.191
-##    -0.020   -0.020
-##                   
-##     0.156    0.156
-##     0.145    0.145
-##                   
-##     0.265    0.265
-##     0.047    0.047
-##                   
-##     0.011    0.011
-##    -0.005   -0.005
-##                   
-##     0.096    0.096
-##     0.085    0.085
-##                   
-##     0.044    0.044
-##     0.191    0.191
-##                   
-##     0.122    0.122
-##     0.279    0.279
+##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper   Std.lv  Std.all
+##   cx2 ~                                                                                   
+##     cx1               0.138    0.042    3.307    0.001    0.056    0.219    0.172    0.172
+##     cy1              -0.023    0.020   -1.131    0.258   -0.063    0.017   -0.039   -0.039
+##   cx3 ~                                                                                   
+##     cx2               0.138    0.056    2.448    0.014    0.027    0.248    0.156    0.156
+##     cy2              -0.024    0.024   -1.032    0.302   -0.071    0.022   -0.042   -0.042
+##   cx4 ~                                                                                   
+##     cx3               0.241    0.084    2.870    0.004    0.077    0.406    0.130    0.130
+##     cy3               0.134    0.041    3.288    0.001    0.054    0.213    0.119    0.119
+##   cx5 ~                                                                                   
+##     cx4               0.175    0.031    5.698    0.000    0.115    0.235    0.273    0.273
+##     cy4               0.029    0.021    1.401    0.161   -0.012    0.070    0.052    0.052
+##   cy2 ~                                                                                   
+##     cx1               0.007    0.046    0.150    0.881   -0.084    0.098    0.006    0.006
+##     cy1              -0.001    0.036   -0.040    0.968   -0.072    0.069   -0.002   -0.002
+##   cy3 ~                                                                                   
+##     cx2               0.113    0.066    1.711    0.087   -0.016    0.241    0.077    0.077
+##     cy2               0.075    0.043    1.724    0.085   -0.010    0.160    0.078    0.078
+##   cy4 ~                                                                                   
+##     cx3               0.006    0.077    0.076    0.940   -0.146    0.158    0.003    0.003
+##     cy3               0.253    0.048    5.286    0.000    0.159    0.346    0.195    0.195
+##   cy5 ~                                                                                   
+##     cx4               0.097    0.033    2.926    0.003    0.032    0.162    0.090    0.090
+##     cy4               0.297    0.033    8.879    0.000    0.231    0.362    0.317    0.317
 ## 
 ## Covariances:
-##                    Estimate  Std.Err
-##   cx1 ~~                            
-##     cy1               0.161    0.024
-##  .cx2 ~~                            
-##    .cy2               0.115    0.021
-##  .cx3 ~~                            
-##    .cy3               0.082    0.016
-##  .cx4 ~~                            
-##    .cy4               0.291    0.024
-##  .cx5 ~~                            
-##    .cy5               0.035    0.015
-##   RI_x ~~                           
-##     RI_y              0.188    0.017
-##     cx1               0.000         
-##     cy1               0.000         
-##   RI_y ~~                           
-##     cx1               0.000         
-##     cy1               0.000         
-##   z-value  P(&gt;|z|) ci.lower ci.upper
-##                                     
-##     6.680    0.000    0.114    0.208
-##                                     
-##     5.505    0.000    0.074    0.156
-##                                     
-##     5.214    0.000    0.051    0.112
-##                                     
-##    11.942    0.000    0.243    0.339
-##                                     
-##     2.421    0.015    0.007    0.064
-##                                     
-##    10.936    0.000    0.155    0.222
-##                       0.000    0.000
-##                       0.000    0.000
-##                                     
-##                       0.000    0.000
-##                       0.000    0.000
-##    Std.lv  Std.all
-##                   
-##     0.271    0.271
-##                   
-##     0.274    0.274
-##                   
-##     0.207    0.207
-##                   
-##     0.328    0.328
-##                   
-##     0.072    0.072
-##                   
-##     0.651    0.651
-##     0.000    0.000
-##     0.000    0.000
-##                   
-##     0.000    0.000
-##     0.000    0.000
+##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper   Std.lv  Std.all
+##   cx1 ~~                                                                                  
+##     cy1               0.163    0.024    6.894    0.000    0.116    0.209    0.272    0.272
+##  .cx2 ~~                                                                                  
+##    .cy2               0.111    0.020    5.613    0.000    0.072    0.150    0.266    0.266
+##  .cx3 ~~                                                                                  
+##    .cy3               0.062    0.018    3.535    0.000    0.028    0.097    0.176    0.176
+##  .cx4 ~~                                                                                  
+##    .cy4               0.244    0.029    8.431    0.000    0.187    0.300    0.293    0.293
+##  .cx5 ~~                                                                                  
+##    .cy5               0.022    0.017    1.250    0.211   -0.012    0.056    0.047    0.047
+##   RI_x ~~                                                                                 
+##     RI_y              0.183    0.018    9.926    0.000    0.147    0.219    0.664    0.664
+##     cx1               0.000                               0.000    0.000    0.000    0.000
+##     cy1               0.000                               0.000    0.000    0.000    0.000
+##   RI_y ~~                                                                                 
+##     cx1               0.000                               0.000    0.000    0.000    0.000
+##     cy1               0.000                               0.000    0.000    0.000    0.000
 ## 
 ## Intercepts:
-##                    Estimate  Std.Err
-##    .off1              1.325    0.014
-##    .off2              1.233    0.013
-##    .off3              1.217    0.010
-##    .off4              1.542    0.017
-##    .off5              1.209    0.012
-##    .onl1              1.733    0.021
-##    .onl2              1.631    0.021
-##    .onl3              1.646    0.017
-##    .onl4              1.905    0.021
-##    .onl5              1.845    0.022
-##     RI_x              0.000         
-##     RI_y              0.000         
-##     cx1               0.000         
-##    .cx2               0.000         
-##    .cx3               0.000         
-##    .cx4               0.000         
-##    .cx5               0.000         
-##     cy1               0.000         
-##    .cy2               0.000         
-##    .cy3               0.000         
-##    .cy4               0.000         
-##    .cy5               0.000         
-##   z-value  P(&gt;|z|) ci.lower ci.upper
-##    93.675    0.000    1.297    1.353
-##    95.647    0.000    1.208    1.258
-##   117.866    0.000    1.196    1.237
-##    89.988    0.000    1.508    1.575
-##   101.809    0.000    1.186    1.232
-##    82.252    0.000    1.692    1.775
-##    78.571    0.000    1.591    1.672
-##    94.816    0.000    1.612    1.680
-##    88.631    0.000    1.863    1.947
-##    85.604    0.000    1.803    1.888
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##    Std.lv  Std.all
-##     1.325    1.740
-##     1.233    1.882
-##     1.217    1.892
-##     1.542    1.561
-##     1.209    1.740
-##     1.733    1.476
-##     1.631    1.483
-##     1.646    1.513
-##     1.905    1.498
-##     1.845    1.538
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
+##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper   Std.lv  Std.all
+##    .off1              1.313    0.014   91.514    0.000    1.285    1.341    1.313    1.734
+##    .off2              1.217    0.013   95.154    0.000    1.192    1.243    1.217    1.886
+##    .off3              1.189    0.012   96.373    0.000    1.164    1.213    1.189    1.994
+##    .off4              1.501    0.021   72.073    0.000    1.460    1.542    1.501    1.592
+##    .off5              1.189    0.014   84.928    0.000    1.161    1.216    1.189    1.778
+##    .onl1              1.714    0.022   78.689    0.000    1.671    1.756    1.714    1.464
+##    .onl2              1.609    0.022   74.560    0.000    1.566    1.651    1.609    1.473
+##    .onl3              1.607    0.022   73.666    0.000    1.564    1.649    1.607    1.504
+##    .onl4              1.865    0.027   70.135    0.000    1.813    1.917    1.865    1.502
+##    .onl5              1.816    0.027   67.613    0.000    1.763    1.868    1.816    1.523
+##     RI_x              0.000                               0.000    0.000    0.000    0.000
+##     RI_y              0.000                               0.000    0.000    0.000    0.000
+##     cx1               0.000                               0.000    0.000    0.000    0.000
+##    .cx2               0.000                               0.000    0.000    0.000    0.000
+##    .cx3               0.000                               0.000    0.000    0.000    0.000
+##    .cx4               0.000                               0.000    0.000    0.000    0.000
+##    .cx5               0.000                               0.000    0.000    0.000    0.000
+##     cy1               0.000                               0.000    0.000    0.000    0.000
+##    .cy2               0.000                               0.000    0.000    0.000    0.000
+##    .cy3               0.000                               0.000    0.000    0.000    0.000
+##    .cy4               0.000                               0.000    0.000    0.000    0.000
+##    .cy5               0.000                               0.000    0.000    0.000    0.000
 ## 
 ## Variances:
-##                    Estimate  Std.Err
-##    .off1              0.000         
-##    .off2              0.000         
-##    .off3              0.000         
-##    .off4              0.000         
-##    .off5              0.000         
-##    .onl1              0.000         
-##    .onl2              0.000         
-##    .onl3              0.000         
-##    .onl4              0.000         
-##    .onl5              0.000         
-##     cx1               0.430    0.031
-##     cy1               0.818    0.037
-##    .cx2               0.272    0.023
-##    .cy2               0.650    0.039
-##    .cx3               0.255    0.019
-##    .cy3               0.610    0.028
-##    .cx4               0.781    0.030
-##    .cy4               1.012    0.033
-##    .cx5               0.306    0.023
-##    .cy5               0.778    0.031
-##     RI_x              0.149    0.018
-##     RI_y              0.560    0.026
-##   z-value  P(&gt;|z|) ci.lower ci.upper
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##                       0.000    0.000
-##    13.927    0.000    0.370    0.491
-##    22.306    0.000    0.747    0.890
-##    11.585    0.000    0.226    0.318
-##    16.820    0.000    0.574    0.726
-##    13.304    0.000    0.217    0.292
-##    21.952    0.000    0.556    0.664
-##    25.756    0.000    0.721    0.840
-##    30.901    0.000    0.947    1.076
-##    13.306    0.000    0.261    0.351
-##    25.177    0.000    0.717    0.838
-##     8.365    0.000    0.114    0.185
-##    21.147    0.000    0.508    0.612
-##    Std.lv  Std.all
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     0.000    0.000
-##     1.000    1.000
-##     1.000    1.000
-##     0.974    0.974
-##     1.000    1.000
-##     0.965    0.965
-##     0.979    0.979
-##     0.945    0.945
-##     0.958    0.958
-##     0.918    0.918
-##     0.883    0.883
-##     1.000    1.000
-##     1.000    1.000
+##                    Estimate  Std.Err  z-value  P(&gt;|z|) ci.lower ci.upper   Std.lv  Std.all
+##    .off1              0.000                               0.000    0.000    0.000    0.000
+##    .off2              0.000                               0.000    0.000    0.000    0.000
+##    .off3              0.000                               0.000    0.000    0.000    0.000
+##    .off4              0.000                               0.000    0.000    0.000    0.000
+##    .off5              0.000                               0.000    0.000    0.000    0.000
+##    .onl1              0.000                               0.000    0.000    0.000    0.000
+##    .onl2              0.000                               0.000    0.000    0.000    0.000
+##    .onl3              0.000                               0.000    0.000    0.000    0.000
+##    .onl4              0.000                               0.000    0.000    0.000    0.000
+##    .onl5              0.000                               0.000    0.000    0.000    0.000
+##     cx1               0.435    0.030   14.387    0.000    0.375    0.494    1.000    1.000
+##     cy1               0.824    0.036   22.643    0.000    0.753    0.896    1.000    1.000
+##    .cx2               0.270    0.022   12.180    0.000    0.227    0.314    0.973    0.973
+##    .cy2               0.647    0.038   17.004    0.000    0.572    0.722    1.000    1.000
+##    .cx3               0.212    0.021    9.857    0.000    0.170    0.254    0.977    0.977
+##    .cy3               0.587    0.033   17.737    0.000    0.522    0.652    0.985    0.985
+##    .cx4               0.723    0.037   19.525    0.000    0.650    0.795    0.963    0.963
+##    .cy4               0.958    0.039   24.393    0.000    0.881    1.035    0.962    0.962
+##    .cx5               0.282    0.026   10.931    0.000    0.231    0.332    0.914    0.914
+##    .cy5               0.765    0.038   20.171    0.000    0.691    0.839    0.874    0.874
+##     RI_x              0.139    0.019    7.377    0.000    0.102    0.176    1.000    1.000
+##     RI_y              0.546    0.030   18.456    0.000    0.488    0.604    1.000    1.000
 ```
 ]
 
@@ -1697,131 +1445,131 @@ kableExtra::kable(gofdt,digits = 2)
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; a1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 193.98 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 171.31 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 29 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74316.98 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74547.37 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74432.98 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37122.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54636.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54852.29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54737.91 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27282.47 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.12 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.20 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; a2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 222.58 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 202.25 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 35 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.95 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.03 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74375.67 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74567.66 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74472.33 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37157.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54697.19 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54876.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54781.32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27318.60 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 30 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.74 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.82 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; b1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 179.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 161.48 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 25 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.97 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.93 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74301.65 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74557.65 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74430.54 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37110.83 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54631.73 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54871.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54743.91 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27275.87 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 40 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.13 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; b2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 213.84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 197.36 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 34 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.95 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.03 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74362.76 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74561.15 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74462.65 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37150.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54691.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54876.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54778.49 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27314.78 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 31 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.68 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; c1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 170.05 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 154.38 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 25 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.97 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74289.74 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74545.73 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74418.63 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37104.87 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54620.69 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54859.96 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54732.86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27270.34 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 40 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.13 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; c2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 220.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200.90 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 34 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74375.90 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74574.29 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74475.78 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37156.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54698.89 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54884.32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54785.82 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27318.44 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 31 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.60 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.67 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; d1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 149.61 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 144.09 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.97 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.93 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.05 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74261.40 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74542.99 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74403.17 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37086.70 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54612.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54875.59 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54735.78 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27262.20 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 44 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.09 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; d2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 209.34 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 195.39 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 33 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.96 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.95 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.03 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.06 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74358.48 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74563.28 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 74461.59 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -37147.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54691.65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54883.07 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54781.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -27313.83 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 32 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.50 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.56 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -1895,67 +1643,67 @@ kableExtra::kable(comp1,digits = 3)
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; a2 vs. a1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.005 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.003 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.007 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.008 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 58.682 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 20.284 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 39.349 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 60.242 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.351 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 43.416 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -35.341 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.020 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.583 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -36.121 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.086 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.679 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.007 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; b2 vs. b1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.006 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.009 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.003 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.007 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.008 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 61.107 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.510 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 32.108 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.003 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.009 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 59.828 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.993 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.589 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -39.554 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.671 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.551 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -38.914 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.712 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.965 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.013 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; c2 vs. c1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.009 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.010 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.003 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 86.158 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 28.560 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 57.159 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 78.201 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.365 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 52.961 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -52.079 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.627 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 28.719 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -48.100 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.701 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.995 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; d2 vs. d1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.010 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.008 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.002 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 97.086 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 20.289 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 58.420 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.011 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.012 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.004 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.012 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 79.259 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.478 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.607 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -12 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -60.543 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.460 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 35.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -51.630 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.503 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.480 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 12 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.003 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2002,81 +1750,81 @@ kable(comp2,digits = 3)
 &lt;tbody&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; a2 vs. b2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.002 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 12.904 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.504 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 9.682 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.632 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.350 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.827 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -7.452 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -2.363 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -6.308 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.816 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.577 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.961 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; a2 vs. c2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.231 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -6.631 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -3.453 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.696 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -7.678 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.500 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.885 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -2.519 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.702 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.152 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.692 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.113 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; a2 vs. d2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.002 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.182 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.383 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 10.738 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.540 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -6.424 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.069 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -10.591 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -2.166 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -9.781 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.770 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.328 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.097 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; b2 vs. d2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4.279 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -2.121 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.057 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -6.074 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.896 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -3.139 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -1.969 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -3.189 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.954 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.079 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.918 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; c2 vs. d2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -0.002 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.413 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11.014 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 14.191 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.235 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.254 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.431 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; -1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -9.707 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -1.812 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; -10.712 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.618 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.964 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.702 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
   &lt;/tr&gt;
@@ -2107,188 +1855,97 @@ parameterEstimates(fit[["d2"]])
 ```
 
 ```
-##     lhs op  rhs label   est    se       z
-## 1  RI_x =~ off1       1.000 0.000      NA
-## 2  RI_x =~ off2       1.000 0.000      NA
-## 3  RI_x =~ off3       1.000 0.000      NA
-## 4  RI_x =~ off4       1.000 0.000      NA
-## 5  RI_x =~ off5       1.000 0.000      NA
-## 6  RI_y =~ onl1       1.000 0.000      NA
-## 7  RI_y =~ onl2       1.000 0.000      NA
-## 8  RI_y =~ onl3       1.000 0.000      NA
-## 9  RI_y =~ onl4       1.000 0.000      NA
-## 10 RI_y =~ onl5       1.000 0.000      NA
-## 11  cx1 =~ off1       1.000 0.000      NA
-## 12  cx2 =~ off2       1.000 0.000      NA
-## 13  cx3 =~ off3       1.000 0.000      NA
-## 14  cx4 =~ off4       1.000 0.000      NA
-## 15  cx5 =~ off5       1.000 0.000      NA
-## 16  cy1 =~ onl1       1.000 0.000      NA
-## 17  cy2 =~ onl2       1.000 0.000      NA
-## 18  cy3 =~ onl3       1.000 0.000      NA
-## 19  cy4 =~ onl4       1.000 0.000      NA
-## 20  cy5 =~ onl5       1.000 0.000      NA
-## 21 off1 ~~ off1       0.000 0.000      NA
-## 22 off2 ~~ off2       0.000 0.000      NA
-## 23 off3 ~~ off3       0.000 0.000      NA
-## 24 off4 ~~ off4       0.000 0.000      NA
-## 25 off5 ~~ off5       0.000 0.000      NA
-## 26 onl1 ~~ onl1       0.000 0.000      NA
-## 27 onl2 ~~ onl2       0.000 0.000      NA
-## 28 onl3 ~~ onl3       0.000 0.000      NA
-## 29 onl4 ~~ onl4       0.000 0.000      NA
-## 30 onl5 ~~ onl5       0.000 0.000      NA
-## 31  cx2  ~  cx1     a 0.152 0.022   6.997
-## 32  cx2  ~  cy1     b 0.022 0.011   2.036
-## 33  cx3  ~  cx2     a 0.152 0.022   6.997
-## 34  cx3  ~  cy2     b 0.022 0.011   2.036
-## 35  cx4  ~  cx3     a 0.152 0.022   6.997
-## 36  cx4  ~  cy3     b 0.022 0.011   2.036
-## 37  cx5  ~  cx4     a 0.152 0.022   6.997
-## 38  cx5  ~  cy4     b 0.022 0.011   2.036
-## 39  cy2  ~  cx1     c 0.079 0.023   3.418
-## 40  cy2  ~  cy1     d 0.142 0.022   6.555
-## 41  cy3  ~  cx2     c 0.079 0.023   3.418
-## 42  cy3  ~  cy2     d 0.142 0.022   6.555
-## 43  cy4  ~  cx3     c 0.079 0.023   3.418
-## 44  cy4  ~  cy3     d 0.142 0.022   6.555
-## 45  cy5  ~  cx4     c 0.079 0.023   3.418
-## 46  cy5  ~  cy4     d 0.142 0.022   6.555
-## 47  cx1 ~~  cy1       0.176 0.022   7.910
-## 48  cx2 ~~  cy2       0.139 0.019   7.454
-## 49  cx3 ~~  cy3       0.071 0.014   4.962
-## 50  cx4 ~~  cy4       0.258 0.024  10.670
-## 51  cx5 ~~  cy5       0.025 0.014   1.756
-## 52  cx1 ~~  cx1       0.431 0.028  15.331
-## 53  cy1 ~~  cy1       0.869 0.037  23.649
-## 54  cx2 ~~  cx2       0.275 0.021  12.888
-## 55  cy2 ~~  cy2       0.735 0.036  20.144
-## 56  cx3 ~~  cx3       0.246 0.018  13.673
-## 57  cy3 ~~  cy3       0.588 0.026  22.857
-## 58  cx4 ~~  cx4       0.769 0.031  25.143
-## 59  cy4 ~~  cy4       0.949 0.034  27.589
-## 60  cx5 ~~  cx5       0.305 0.022  14.017
-## 61  cy5 ~~  cy5       0.747 0.031  23.978
-## 62 RI_x ~~ RI_x       0.161 0.016  10.220
-## 63 RI_y ~~ RI_y       0.581 0.025  22.835
-## 64 RI_x ~~ RI_y       0.202 0.015  13.343
-## 65 RI_x ~~  cx1       0.000 0.000      NA
-## 66 RI_x ~~  cy1       0.000 0.000      NA
-## 67 RI_y ~~  cx1       0.000 0.000      NA
-## 68 RI_y ~~  cy1       0.000 0.000      NA
-## 69 off1 ~1            1.327 0.014  93.848
-## 70 off2 ~1            1.234 0.013  97.101
-## 71 off3 ~1            1.217 0.010 117.731
-## 72 off4 ~1            1.541 0.017  90.026
-## 73 off5 ~1            1.209 0.012  99.232
-## 74 onl1 ~1            1.736 0.021  82.430
-## 75 onl2 ~1            1.636 0.021  79.135
-## 76 onl3 ~1            1.646 0.017  94.755
-## 77 onl4 ~1            1.904 0.021  88.599
-## 78 onl5 ~1            1.847 0.022  85.202
-## 79 RI_x ~1            0.000 0.000      NA
-## 80 RI_y ~1            0.000 0.000      NA
-## 81  cx1 ~1            0.000 0.000      NA
-## 82  cx2 ~1            0.000 0.000      NA
-## 83  cx3 ~1            0.000 0.000      NA
-## 84  cx4 ~1            0.000 0.000      NA
-## 85  cx5 ~1            0.000 0.000      NA
-## 86  cy1 ~1            0.000 0.000      NA
-## 87  cy2 ~1            0.000 0.000      NA
-## 88  cy3 ~1            0.000 0.000      NA
-## 89  cy4 ~1            0.000 0.000      NA
-## 90  cy5 ~1            0.000 0.000      NA
-##    pvalue ci.lower ci.upper
-## 1      NA    1.000    1.000
-## 2      NA    1.000    1.000
-## 3      NA    1.000    1.000
-## 4      NA    1.000    1.000
-## 5      NA    1.000    1.000
-## 6      NA    1.000    1.000
-## 7      NA    1.000    1.000
-## 8      NA    1.000    1.000
-## 9      NA    1.000    1.000
-## 10     NA    1.000    1.000
-## 11     NA    1.000    1.000
-## 12     NA    1.000    1.000
-## 13     NA    1.000    1.000
-## 14     NA    1.000    1.000
-## 15     NA    1.000    1.000
-## 16     NA    1.000    1.000
-## 17     NA    1.000    1.000
-## 18     NA    1.000    1.000
-## 19     NA    1.000    1.000
-## 20     NA    1.000    1.000
-## 21     NA    0.000    0.000
-## 22     NA    0.000    0.000
-## 23     NA    0.000    0.000
-## 24     NA    0.000    0.000
-## 25     NA    0.000    0.000
-## 26     NA    0.000    0.000
-## 27     NA    0.000    0.000
-## 28     NA    0.000    0.000
-## 29     NA    0.000    0.000
-## 30     NA    0.000    0.000
-## 31  0.000    0.109    0.194
-## 32  0.042    0.001    0.044
-## 33  0.000    0.109    0.194
-## 34  0.042    0.001    0.044
-## 35  0.000    0.109    0.194
-## 36  0.042    0.001    0.044
-## 37  0.000    0.109    0.194
-## 38  0.042    0.001    0.044
-## 39  0.001    0.034    0.124
-## 40  0.000    0.100    0.185
-## 41  0.001    0.034    0.124
-## 42  0.000    0.100    0.185
-## 43  0.001    0.034    0.124
-## 44  0.000    0.100    0.185
-## 45  0.001    0.034    0.124
-## 46  0.000    0.100    0.185
-## 47  0.000    0.132    0.219
-## 48  0.000    0.102    0.175
-## 49  0.000    0.043    0.098
-## 50  0.000    0.210    0.305
-## 51  0.079   -0.003    0.053
-## 52  0.000    0.376    0.486
-## 53  0.000    0.797    0.942
-## 54  0.000    0.233    0.317
-## 55  0.000    0.664    0.807
-## 56  0.000    0.211    0.281
-## 57  0.000    0.537    0.638
-## 58  0.000    0.709    0.829
-## 59  0.000    0.881    1.016
-## 60  0.000    0.263    0.348
-## 61  0.000    0.686    0.808
-## 62  0.000    0.130    0.192
-## 63  0.000    0.531    0.631
-## 64  0.000    0.172    0.232
-## 65     NA    0.000    0.000
-## 66     NA    0.000    0.000
-## 67     NA    0.000    0.000
-## 68     NA    0.000    0.000
-## 69  0.000    1.299    1.354
-## 70  0.000    1.209    1.259
-## 71  0.000    1.196    1.237
-## 72  0.000    1.507    1.574
-## 73  0.000    1.185    1.232
-## 74  0.000    1.695    1.778
-## 75  0.000    1.596    1.677
-## 76  0.000    1.612    1.680
-## 77  0.000    1.862    1.946
-## 78  0.000    1.805    1.890
-## 79     NA    0.000    0.000
-## 80     NA    0.000    0.000
-## 81     NA    0.000    0.000
-## 82     NA    0.000    0.000
-## 83     NA    0.000    0.000
-## 84     NA    0.000    0.000
-## 85     NA    0.000    0.000
-## 86     NA    0.000    0.000
-## 87     NA    0.000    0.000
-## 88     NA    0.000    0.000
-## 89     NA    0.000    0.000
-## 90     NA    0.000    0.000
+##     lhs op  rhs label   est    se      z pvalue ci.lower ci.upper
+## 1  RI_x =~ off1       1.000 0.000     NA     NA    1.000    1.000
+## 2  RI_x =~ off2       1.000 0.000     NA     NA    1.000    1.000
+## 3  RI_x =~ off3       1.000 0.000     NA     NA    1.000    1.000
+## 4  RI_x =~ off4       1.000 0.000     NA     NA    1.000    1.000
+## 5  RI_x =~ off5       1.000 0.000     NA     NA    1.000    1.000
+## 6  RI_y =~ onl1       1.000 0.000     NA     NA    1.000    1.000
+## 7  RI_y =~ onl2       1.000 0.000     NA     NA    1.000    1.000
+## 8  RI_y =~ onl3       1.000 0.000     NA     NA    1.000    1.000
+## 9  RI_y =~ onl4       1.000 0.000     NA     NA    1.000    1.000
+## 10 RI_y =~ onl5       1.000 0.000     NA     NA    1.000    1.000
+## 11  cx1 =~ off1       1.000 0.000     NA     NA    1.000    1.000
+## 12  cx2 =~ off2       1.000 0.000     NA     NA    1.000    1.000
+## 13  cx3 =~ off3       1.000 0.000     NA     NA    1.000    1.000
+## 14  cx4 =~ off4       1.000 0.000     NA     NA    1.000    1.000
+## 15  cx5 =~ off5       1.000 0.000     NA     NA    1.000    1.000
+## 16  cy1 =~ onl1       1.000 0.000     NA     NA    1.000    1.000
+## 17  cy2 =~ onl2       1.000 0.000     NA     NA    1.000    1.000
+## 18  cy3 =~ onl3       1.000 0.000     NA     NA    1.000    1.000
+## 19  cy4 =~ onl4       1.000 0.000     NA     NA    1.000    1.000
+## 20  cy5 =~ onl5       1.000 0.000     NA     NA    1.000    1.000
+## 21 off1 ~~ off1       0.000 0.000     NA     NA    0.000    0.000
+## 22 off2 ~~ off2       0.000 0.000     NA     NA    0.000    0.000
+## 23 off3 ~~ off3       0.000 0.000     NA     NA    0.000    0.000
+## 24 off4 ~~ off4       0.000 0.000     NA     NA    0.000    0.000
+## 25 off5 ~~ off5       0.000 0.000     NA     NA    0.000    0.000
+## 26 onl1 ~~ onl1       0.000 0.000     NA     NA    0.000    0.000
+## 27 onl2 ~~ onl2       0.000 0.000     NA     NA    0.000    0.000
+## 28 onl3 ~~ onl3       0.000 0.000     NA     NA    0.000    0.000
+## 29 onl4 ~~ onl4       0.000 0.000     NA     NA    0.000    0.000
+## 30 onl5 ~~ onl5       0.000 0.000     NA     NA    0.000    0.000
+## 31  cx2  ~  cx1     a 0.155 0.025  6.291  0.000    0.107    0.203
+## 32  cx2  ~  cy1     b 0.013 0.011  1.113  0.266   -0.010    0.035
+## 33  cx3  ~  cx2     a 0.155 0.025  6.291  0.000    0.107    0.203
+## 34  cx3  ~  cy2     b 0.013 0.011  1.113  0.266   -0.010    0.035
+## 35  cx4  ~  cx3     a 0.155 0.025  6.291  0.000    0.107    0.203
+## 36  cx4  ~  cy3     b 0.013 0.011  1.113  0.266   -0.010    0.035
+## 37  cx5  ~  cx4     a 0.155 0.025  6.291  0.000    0.107    0.203
+## 38  cx5  ~  cy4     b 0.013 0.011  1.113  0.266   -0.010    0.035
+## 39  cy2  ~  cx1     c 0.061 0.026  2.364  0.018    0.010    0.112
+## 40  cy2  ~  cy1     d 0.142 0.023  6.123  0.000    0.097    0.187
+## 41  cy3  ~  cx2     c 0.061 0.026  2.364  0.018    0.010    0.112
+## 42  cy3  ~  cy2     d 0.142 0.023  6.123  0.000    0.097    0.187
+## 43  cy4  ~  cx3     c 0.061 0.026  2.364  0.018    0.010    0.112
+## 44  cy4  ~  cy3     d 0.142 0.023  6.123  0.000    0.097    0.187
+## 45  cy5  ~  cx4     c 0.061 0.026  2.364  0.018    0.010    0.112
+## 46  cy5  ~  cy4     d 0.142 0.023  6.123  0.000    0.097    0.187
+## 47  cx1 ~~  cy1       0.177 0.022  7.974  0.000    0.134    0.221
+## 48  cx2 ~~  cy2       0.134 0.018  7.413  0.000    0.099    0.170
+## 49  cx3 ~~  cy3       0.061 0.016  3.796  0.000    0.030    0.093
+## 50  cx4 ~~  cy4       0.222 0.029  7.672  0.000    0.165    0.278
+## 51  cx5 ~~  cy5       0.008 0.017  0.491  0.624   -0.025    0.042
+## 52  cx1 ~~  cx1       0.439 0.028 15.553  0.000    0.383    0.494
+## 53  cy1 ~~  cy1       0.876 0.037 23.916  0.000    0.805    0.948
+## 54  cx2 ~~  cx2       0.278 0.021 13.374  0.000    0.237    0.318
+## 55  cy2 ~~  cy2       0.733 0.036 20.166  0.000    0.662    0.805
+## 56  cx3 ~~  cx3       0.214 0.020 10.547  0.000    0.174    0.254
+## 57  cy3 ~~  cy3       0.578 0.032 18.092  0.000    0.515    0.640
+## 58  cx4 ~~  cx4       0.715 0.037 19.141  0.000    0.642    0.789
+## 59  cy4 ~~  cy4       0.900 0.041 22.178  0.000    0.820    0.979
+## 60  cx5 ~~  cx5       0.277 0.024 11.614  0.000    0.230    0.323
+## 61  cy5 ~~  cy5       0.734 0.038 19.295  0.000    0.659    0.809
+## 62 RI_x ~~ RI_x       0.141 0.017  8.323  0.000    0.108    0.175
+## 63 RI_y ~~ RI_y       0.548 0.028 19.269  0.000    0.492    0.604
+## 64 RI_x ~~ RI_y       0.186 0.017 11.190  0.000    0.154    0.219
+## 65 RI_x ~~  cx1       0.000 0.000     NA     NA    0.000    0.000
+## 66 RI_x ~~  cy1       0.000 0.000     NA     NA    0.000    0.000
+## 67 RI_y ~~  cx1       0.000 0.000     NA     NA    0.000    0.000
+## 68 RI_y ~~  cy1       0.000 0.000     NA     NA    0.000    0.000
+## 69 off1 ~1            1.313 0.014 91.514  0.000    1.285    1.341
+## 70 off2 ~1            1.218 0.013 95.375  0.000    1.193    1.243
+## 71 off3 ~1            1.189 0.012 96.282  0.000    1.165    1.213
+## 72 off4 ~1            1.500 0.021 72.012  0.000    1.460    1.541
+## 73 off5 ~1            1.189 0.014 82.300  0.000    1.161    1.217
+## 74 onl1 ~1            1.714 0.022 78.694  0.000    1.671    1.757
+## 75 onl2 ~1            1.610 0.022 74.618  0.000    1.567    1.652
+## 76 onl3 ~1            1.607 0.022 73.643  0.000    1.564    1.650
+## 77 onl4 ~1            1.865 0.027 70.082  0.000    1.813    1.917
+## 78 onl5 ~1            1.817 0.027 67.362  0.000    1.764    1.870
+## 79 RI_x ~1            0.000 0.000     NA     NA    0.000    0.000
+## 80 RI_y ~1            0.000 0.000     NA     NA    0.000    0.000
+## 81  cx1 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 82  cx2 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 83  cx3 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 84  cx4 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 85  cx5 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 86  cy1 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 87  cy2 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 88  cy3 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 89  cy4 ~1            0.000 0.000     NA     NA    0.000    0.000
+## 90  cy5 ~1            0.000 0.000     NA     NA    0.000    0.000
 ```
 
 
@@ -2322,34 +1979,34 @@ kable(param[op=="~~" &amp; rhs %in% c("RI_x","RI_y"), !"label"], digits = 3)
    &lt;td style="text-align:left;"&gt; RI_x &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; RI_x &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.161 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.016 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 10.220 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.141 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.017 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.323 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.130 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.192 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.108 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.175 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; RI_y &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; RI_y &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.581 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.025 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 22.835 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.548 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.269 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.531 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.631 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.492 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.604 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; RI_x &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; RI_y &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.202 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.015 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 13.343 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.186 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.017 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.190 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.172 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.232 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.154 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.219 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2403,45 +2060,45 @@ kable(param[op=="~" &amp; rhs %in% c("cx1","cy1") &amp; lhs %in% c("cx2","cy2"),
    &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.152 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.997 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.155 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.025 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.291 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.109 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.107 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.203 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.013 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.036 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.042 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.044 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.113 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.079 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.418 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.034 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.124 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.061 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.026 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.364 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.018 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.142 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.555 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.123 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.100 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.185 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.097 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.187 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2498,45 +2155,45 @@ kable(param[op=="~" &amp; rhs %in% c("cx1","cy1") &amp; lhs %in% c("cx2","cy2"),
    &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.152 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.997 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.155 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.025 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.291 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.109 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.107 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.203 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; cx2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.013 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.011 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.036 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.042 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.044 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.113 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.266 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.035 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cx1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.079 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.418 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.034 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.124 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.061 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.026 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.364 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.018 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.112 &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; cy2 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; ~ &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; cy1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.142 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.022 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.555 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.023 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.123 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.100 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.185 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.097 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.187 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2652,19 +2309,6 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
-// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
-// screen reader (see PR #262)
-(function(d) {
-  let res = {};
-  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
-    const t = tr.querySelector('td:nth-child(2)').innerText;
-    tr.querySelectorAll('td:first-child .key').forEach(key => {
-      const k = key.innerText;
-      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
-    });
-  });
-  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
-})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

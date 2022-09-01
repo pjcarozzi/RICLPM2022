@@ -268,7 +268,7 @@ Previo: Preparar los datos.
 # Data
 load(url("https://dataverse.harvard.edu/api/access/datafile/6160173"))
 setDT(elsoc_long_2016_2021)
-
+elsoc_long_2016_2021 <- elsoc_long_2016_2021[muestra==1,]
 # Long to wide
 elsoc <- dcast(elsoc_long_2016_2021, idencuesta ~ ola, value.var = c("c08_02","c08_04","m0_edad","m01","m0_sexo"))
 
